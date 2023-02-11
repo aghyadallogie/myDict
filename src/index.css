@@ -1,17 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --primary: #12bca2;
   --secondary: #6d15df;
 }
+
 h1,h2,h3 {
   margin: 0;
 }
 
 body {
   margin: 0;
-  color: #333;
+  color: #548c77;
   font-family: 'Poppins';
+  font-weight: 600;
   background: #f2f2f2;
   width: 100vw;
 }
@@ -32,5 +40,5 @@ nav h1 {
 .page {
   max-width: 100vw;
   margin: 20px auto;
-  padding: 20px;
+  padding: 1rem 2rem;
 }

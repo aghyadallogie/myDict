@@ -1,3 +1,5 @@
+import { AnyAction } from "redux";
+
 const GET_USERS = "GET_USERS";
 const USER_LOADED = "USER_LOADED";
 const USER_LOADING = "USER_LOADING";
@@ -21,11 +23,12 @@ export enum ActionTypes {
   USER_LOADED = "USER_LOADED",
   USER_LOADING = "USER_LOADING",
   UPDATE_USER_LANGUAGES = "UPDATE_USER_LANGUAGES",
+  UPDATE_TARGET_WORD = "UPDATE_TARGET_WORD",
 }
 
-interface LoadingAction {
+export interface UpdatingTargetWord extends AnyAction {
   type: string;
   payload: any;
 }
 
-export type Action = LoadingAction;
+export type Action = UpdatingTargetWord;

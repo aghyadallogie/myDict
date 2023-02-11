@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { LanguagePicker } from "../../components/LanguagePicker/LanguagePicker";
-import { loadUserAction, userActions } from "../../store/actions";
+import { TargetWord } from "../../components/TargetWord/TargetWord";
+import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
+import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 
 type User = {
@@ -16,7 +18,7 @@ type Lingo = {
   targetWord: any;
 };
 
-export const Home = () => {
+export const Home: FC = () => {
   const dispatch = useDispatch();
   const authenticatedUser = useSelector(
     (state: RootState) => state.authenticatedUser
@@ -30,7 +32,8 @@ export const Home = () => {
 
   return (
     <div className="page home">
-      <LanguagePicker />
+      <TranslateBox />
+      <TargetWord />
     </div>
   );
 };

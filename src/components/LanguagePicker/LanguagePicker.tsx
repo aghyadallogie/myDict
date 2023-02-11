@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { ActionTypes } from "../../store/actions/types";
+import { RootState } from "../../store/reducers";
 import { styles } from "./LanguagePicker.styles";
 
 export type Styles = {
@@ -21,7 +22,7 @@ const langs = [
 ];
 
 export const LanguagePicker = () => {
-  const user = useSelector((state: any) => state.authenticatedUser.user);
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   const dispatch = useDispatch();
 
