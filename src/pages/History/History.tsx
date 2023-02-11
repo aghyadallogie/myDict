@@ -16,11 +16,12 @@ export const History: FC = () => {
     if (allWords.length > 0) {
       return allWords.map((word: any) => {
         return (
-          <div
+          <styles.Table
             style={{
               padding: ".1rem",
               backgroundColor: "#d8d8d877",
               marginTop: "1rem",
+              cursor: "pointer",
             }}
             onClick={() => alert(word.id)}
           >
@@ -30,7 +31,7 @@ export const History: FC = () => {
                 <span>{trans.lingo}</span>
               </styles.Row>
             ))}
-          </div>
+          </styles.Table>
         );
       });
     } else {
