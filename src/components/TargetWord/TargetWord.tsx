@@ -20,7 +20,7 @@ export const TargetWord: FC = () => {
         <styles.Table>
           {targetWord[0].translations.map((translation: any) => (
             <styles.Row key={translation.lang}>
-              <span>{translation.lang}</span>
+              <span className={`fi fi-${translation.lang}`}></span>
               <span>{translation.lingo}</span>
             </styles.Row>
           ))}

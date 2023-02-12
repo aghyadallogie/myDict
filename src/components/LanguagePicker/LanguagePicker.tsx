@@ -10,15 +10,15 @@ export type Styles = {
 };
 
 const langs = [
-  { code: "de", flag: "de" },
-  { code: "fr", flag: "fr" },
-  { code: "it", flag: "it" },
-  { code: "es", flag: "es" },
-  { code: "ja", flag: "ja" },
-  { code: "pl", flag: "pl" },
-  { code: "pt", flag: "pt" },
-  { code: "ru", flag: "ru" },
-  { code: "sv", flag: "sv" },
+  { code: "de", flag: "fi fi-de" },
+  { code: "fr", flag: "fi fi-fr" },
+  { code: "it", flag: "fi fi-it" },
+  { code: "es", flag: "fi fi-es" },
+  { code: "no", flag: "fi fi-no" },
+  { code: "pl", flag: "fi fi-pl" },
+  { code: "pt", flag: "fi fi-pt" },
+  { code: "ru", flag: "fi fi-ru" },
+  { code: "tr", flag: "fi fi-tr" },
 ];
 
 export const LanguagePicker = () => {
@@ -40,9 +40,8 @@ export const LanguagePicker = () => {
           key={lang.code}
           picked={user.languages.includes(lang.code) ? true : false}
           onClick={() => toggleLanguage(lang.code)}
-        >
-          {lang.code}
-        </styles.Flag>
+          className={lang.flag}
+        />
       ))}
     </styles.LanguagePicker>
   );
