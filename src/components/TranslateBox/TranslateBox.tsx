@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useRef, KeyboardEvent } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -22,13 +22,15 @@ export const TranslateBox: FC = () => {
     (state: RootState) => state.authenticatedUser.user.languages
   );
 
-  const handleClick = async () => {
-    const translations = await translateWordToLangs(
-      inputRef.current!.value,
-      userLanguages
-    );
+  const handleClick = async (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      const translations = await translateWordToLangs(
+        inputRef.current!.value,
+        userLanguages
+      );
 
-    updateTargetWordAction(translations);
+      updateTargetWordAction(translations);
+    }
   };
 
   return (
@@ -37,6 +39,7 @@ export const TranslateBox: FC = () => {
         ref={inputRef}
         type="text"
         placeholder="word to translate"
+        onKeyPress={handleClick}
       />
       <styles.Button onClick={handleClick}>Translate</styles.Button>
     </styles.TranslateBox>

@@ -4,7 +4,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   errorMessage: "",
-  user: { userId: 0, username: "test", languages: ["it", "de"] },
+  user: { userId: 0, username: "test", languages: ["de"] },
   targetWord: [],
   words: [],
 };

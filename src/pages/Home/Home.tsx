@@ -1,7 +1,6 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { LanguagePicker } from "../../components/LanguagePicker/LanguagePicker";
 import { TargetWord } from "../../components/TargetWord/TargetWord";
 import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
@@ -20,7 +19,7 @@ type Lingo = {
 
 export const Home: FC = () => {
   const dispatch = useDispatch();
-  const authenticatedUser = useSelector(
+  const authenticatedUser = useSelector(  // needed ?
     (state: RootState) => state.authenticatedUser
   );
 

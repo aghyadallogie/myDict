@@ -15,7 +15,7 @@ export const History: FC = () => {
           <styles.Table onClick={() => alert(word.id)}>
             {word.translations.map((trans: any) => (
               <styles.Row>
-                <span className={`fi fi-${trans.lang}`}></span>
+                <span className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}></span>
                 <span>{trans.lingo}</span>
               </styles.Row>
             ))}

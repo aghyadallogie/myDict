@@ -1,4 +1,5 @@
 import axios from "axios";
+import supabase from "../config/supabaseClient";
 
 const translateWordToLang = async (word: string, lang: string) => {
   const response = await axios.get(
@@ -14,10 +15,21 @@ const translateWordToLang = async (word: string, lang: string) => {
 };
 
 export const translateWordToLangs = async (word: string, langs: any[]) => {
-  const wordsPromises = langs.map(
+  const wordsPromises = ["en", ...langs].map(
     async (lang: string) => await translateWordToLang(word, lang)
   );
 
   const translations = await Promise.all(wordsPromises);
   return translations;
+};
+
+export const getLatestWordHelper = async () => {
+  const { data, error } = await supabase.from("words").select();
+
+  if (error) {
+    console.log(error);
+    return error;
+  }
+
+  return data[data.length - 1];
 };
