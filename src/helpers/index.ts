@@ -14,7 +14,7 @@ const translateWordToLang = async (word: string, lang: string) => {
   return translation;
 };
 
-export const translateWordToLangs = async (word: string, langs: any[]) => {
+export const translateWordToLangs = async (word: string, langs: string[]) => {
   const wordsPromises = ["en", ...langs].map(
     async (lang: string) => await translateWordToLang(word, lang)
   );

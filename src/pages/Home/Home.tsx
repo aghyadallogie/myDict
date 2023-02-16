@@ -17,6 +17,13 @@ type Lingo = {
   targetWord: any;
 };
 
+// minimal localstorage
+// history re-renders only on re-visiting home
+// history re-renders on useEffect
+// button doesnt work
+// user auth
+// &source_lang=${srcLang}
+
 export const Home: FC = () => {
   const dispatch = useDispatch();
   const authenticatedUser = useSelector(  // needed ?
