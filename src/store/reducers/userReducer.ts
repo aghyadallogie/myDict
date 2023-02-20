@@ -5,7 +5,7 @@ const initialState = {
   isLoading: false,
   errorMessage: "",
   user: { userId: 0, username: "test", languages: ["de"] },
-  targetWord: [],
+  targetWord: {},
   words: [],
 };
 
@@ -19,12 +19,12 @@ export default function (state = initialState, action: Action) {
       };
 
     case ActionTypes.USER_LOADED:
-      const targetWord = localStorage.getItem("targetWord") || "[]";
+      const targetWord = localStorage.getItem("targetWord") || "{}";
       const loadedState = {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        targetWord: JSON.parse(targetWord) || [],
+        targetWord: JSON.parse(targetWord) || {},
         words: action.payload,
       };
       return loadedState;

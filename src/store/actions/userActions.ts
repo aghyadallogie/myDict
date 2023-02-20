@@ -38,7 +38,7 @@ export const updateTargetWordAction =
     if (data) {
       return dispatch({
         type: ActionTypes.UPDATE_TARGET_WORD,
-        payload: data,
+        payload: data[0],
       });
     }
   };

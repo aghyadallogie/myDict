@@ -3,7 +3,7 @@ import { Styles } from "./TranslateBox";
 
 export const styles = {} as Styles;
 
-styles.TranslateBox = styled.div`
+styles.TranslateBox = styled.form`
   display: flex;
   margin: 1rem 0;
 `;

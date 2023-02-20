@@ -1,21 +1,34 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { styles } from "../../components/TargetWord/TargetWord.styles";
+import { bindActionCreators } from "redux";
+import { userActions } from "../../store/actions";
+import { useDispatch } from "react-redux";
 
 export const History: FC = () => {
+  const dispatch = useDispatch();
+  const { loadUserAction } = bindActionCreators(userActions, dispatch);
+
   const allWords = useSelector(
     (state: RootState) => state.authenticatedUser.words
   );
 
+  useEffect(() => {
+    loadUserAction();
+  }, []);
+
+
   const renderWords = () => {
     if (allWords.length > 0) {
-      return allWords.map((word: any) => {
+      return allWords.reverse().map((word: any) => {
         return (
-          <styles.Table onClick={() => alert(word.id)}>
+          <styles.Table key={word.id} onClick={() => alert(word.id)}>
             {word.translations.map((trans: any) => (
-              <styles.Row>
-                <span className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}></span>
+              <styles.Row key={trans.lang}>
+                <span
+                  className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}
+                ></span>
                 <span>{trans.lingo}</span>
               </styles.Row>
             ))}
@@ -23,7 +36,7 @@ export const History: FC = () => {
         );
       });
     } else {
-      return <h1>cant get words</h1>;
+      return <h1 style={{ textAlign: "center" }}>L o a d i n g . . .</h1>;
     }
   };
 

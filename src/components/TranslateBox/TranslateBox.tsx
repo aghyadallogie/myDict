@@ -23,25 +23,19 @@ export const TranslateBox: FC = () => {
   );
 
   const handleClick = async (event: KeyboardEvent) => {
-    if (event.key === "Enter") {
-      const translations = await translateWordToLangs(
-        inputRef.current!.value,
-        userLanguages
-      );
+    event.preventDefault();
+    const translations = await translateWordToLangs(
+      inputRef.current!.value,
+      userLanguages
+    );
 
-      updateTargetWordAction(translations);
-    }
+    updateTargetWordAction(translations);
   };
 
   return (
-    <styles.TranslateBox>
-      <styles.Input
-        ref={inputRef}
-        type="text"
-        placeholder="word to translate"
-        onKeyPress={handleClick}
-      />
-      <styles.Button onClick={handleClick}>Translate</styles.Button>
+    <styles.TranslateBox onSubmit={handleClick}>
+      <styles.Input ref={inputRef} placeholder="word to translate" />
+      <styles.Button type="submit">Translate</styles.Button>
     </styles.TranslateBox>
   );
 };

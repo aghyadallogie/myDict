@@ -16,11 +16,15 @@ export const TargetWord: FC = () => {
 
   return (
     <styles.Wrapper>
-      {targetWord.length > 0 && (
+      {targetWord.id && (
         <styles.Table>
-          {targetWord[0].translations.map((translation: any) => (
+          {targetWord.translations.map((translation: any) => (
             <styles.Row key={translation.lang}>
-              <span className={`fi fi-${translation.lang === "en" ? "gb" : translation.lang}`}></span>
+              <span
+                className={`fi fi-${
+                  translation.lang === "en" ? "gb" : translation.lang
+                }`}
+              ></span>
               <span>{translation.lingo}</span>
             </styles.Row>
           ))}

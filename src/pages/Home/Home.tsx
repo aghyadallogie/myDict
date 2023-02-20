@@ -17,20 +17,21 @@ type Lingo = {
   targetWord: any;
 };
 
+// change targetWord type to {}
 // minimal localstorage
-// history re-renders only on re-visiting home
-// history re-renders on useEffect
-// button doesnt work
 // user auth
 // &source_lang=${srcLang}
 
 export const Home: FC = () => {
   const dispatch = useDispatch();
-  const authenticatedUser = useSelector(  // needed ?
+  const { loadUserAction } = bindActionCreators(userActions, dispatch);
+
+  const authenticatedUser = useSelector(
+    // needed ?
     (state: RootState) => state.authenticatedUser
   );
 
-  const { loadUserAction } = bindActionCreators(userActions, dispatch);
+  console.log(authenticatedUser.words[authenticatedUser.words.length - 1]);
 
   useEffect(() => {
     loadUserAction();
