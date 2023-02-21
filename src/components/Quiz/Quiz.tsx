@@ -1,11 +1,22 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Word } from "../../pages/History/History";
 import { RootState } from "../../store/reducers";
 import { Translation } from "../TargetWord/TargetWord";
+import { styles } from "../TargetWord/TargetWord.styles";
 
 export const Quiz = () => {
+  const dispatch = useDispatch();
   const [correct, setCorrect] = useState(false);
+
+  const userLangs = useSelector(
+    (state: RootState) => state.authenticatedUser.user.languages
+  );
+
+  const streak = useSelector(
+    (state: RootState) => state.authenticatedUser.user.streak
+  );
 
   const allWords = useSelector(
     (state: RootState) => state.authenticatedUser.words
@@ -13,6 +24,7 @@ export const Quiz = () => {
 
   const rnd = Math.floor(Math.random() * allWords.length);
   const randomEnWord = allWords[rnd]?.translations;
+  const randomLang = userLangs[Math.floor(Math.random() * userLangs.length)];
 
   const randomOptions = [
     allWords[rnd - 3],
@@ -26,23 +38,32 @@ export const Quiz = () => {
 
   const options = randomOptions.map((option: Word) =>
     option?.translations.filter(
-      (translation: Translation) => translation.lang === "de"
+      (translation: Translation) => translation.lang === randomLang
     )
   );
 
   const handleAnswer = (answer: string) => {
-    let condition =
-      answer === randomEnWord?.filter((rw: any) => rw.lang === "de")[0].lingo;
-    if (condition) setCorrect(!correct);
+    if (
+      answer ===
+      randomEnWord?.filter((rw: any) => rw.lang === randomLang)[0].lingo
+    ) {
+      setCorrect(!correct);
+      dispatch({ type: "UP_STREAK" });
+    } else {
+      dispatch({ type: "RESET_STREAK" });
+    }
   };
 
   const renderOptions = () => {
     return options.map((opt) => {
       if (opt)
         return (
-          <li key={opt[0].lingo} onClick={() => handleAnswer(opt[0].lingo)}>
+          <styles.Row
+            key={opt[0].lingo}
+            onClick={() => handleAnswer(opt[0].lingo)}
+          >
             {opt[0].lingo}
-          </li>
+          </styles.Row>
         );
     });
   };
@@ -53,11 +74,18 @@ export const Quiz = () => {
         <>
           <h3>
             Which of the following is{" "}
-            <span style={{ color: "silver" }}>{randomEnWord[0]?.lingo}</span> in
-            german ?
+            <span style={{ color: "orange" }}>{randomEnWord[0]?.lingo}</span> in{" "}
+            <span
+              className={`fi fi-${randomLang === "en" ? "gb" : randomLang}`}
+            />{" "}
+            ?
           </h3>
           <br />
-          <ul>{renderOptions()}</ul>
+          <styles.Table>{renderOptions()}</styles.Table>
+          <h3 style={{ textAlign: "center" }}>
+            You are on a streak of{" "}
+            <span style={{ color: "orange" }}>{streak}</span>{" "}
+          </h3>
         </>
       );
     } else {

@@ -4,7 +4,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   errorMessage: "",
-  user: { userId: 0, username: "test", languages: ["de"] },
+  user: { userId: 0, username: "test", languages: ["de"], streak: 0 },
   targetWord: {},
   words: [],
 };
@@ -53,6 +53,17 @@ export default function (state = initialState, action: Action) {
     case ActionTypes.UPDATE_TARGET_WORD:
       const updatedState = { ...state, targetWord: action.payload };
       return updatedState;
+
+    case "UP_STREAK":
+      return {
+        ...state,
+        user: { ...state.user, streak: state.user.streak + 1 },
+      };
+    case "RESET_STREAK":
+      return {
+        ...state,
+        user: { ...state.user, streak: 0 },
+      };
     default:
       return state;
   }

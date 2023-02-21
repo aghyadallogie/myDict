@@ -29,7 +29,7 @@ export const TargetWord: FC = () => {
                 className={`fi fi-${
                   translation.lang === "en" ? "gb" : translation.lang
                 }`}
-              ></span>
+              />
               <span>{translation.lingo}</span>
             </styles.Row>
           ))}
