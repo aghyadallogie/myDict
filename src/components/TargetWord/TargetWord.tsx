@@ -16,7 +16,7 @@ export const TargetWord: FC = () => {
 
   return (
     <styles.Wrapper>
-      {targetWord.id && (
+      {targetWord?.created_at && (
         <styles.Table>
           {targetWord.translations.map((translation: any) => (
             <styles.Row key={translation.lang}>

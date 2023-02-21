@@ -14,17 +14,16 @@ export default function (state = initialState, action: Action) {
     case ActionTypes.USER_LOADING:
       return {
         ...state,
-        user: JSON.parse(localStorage.getItem("user") || ""), // maybe swap those
+        user: JSON.parse(localStorage.getItem("user") || ""),
         isLoading: true,
       };
 
     case ActionTypes.USER_LOADED:
-      const targetWord = localStorage.getItem("targetWord") || "{}";
       const loadedState = {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        targetWord: JSON.parse(targetWord) || {},
+        targetWord: action.payload[action.payload.length - 1],
         words: action.payload,
       };
       return loadedState;
@@ -52,7 +51,6 @@ export default function (state = initialState, action: Action) {
         return updatedState;
       }
     case ActionTypes.UPDATE_TARGET_WORD:
-      localStorage.setItem("targetWord", JSON.stringify(action.payload));
       const updatedState = { ...state, targetWord: action.payload };
       return updatedState;
     default:
