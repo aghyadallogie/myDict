@@ -14,6 +14,7 @@ styles.Input = styled.input`
   border: 0;
   color: blue;
   margin-right: 0.6rem;
+  outline: 1px solid green;
 `;
 
 styles.Button = styled.button`

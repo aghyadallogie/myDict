@@ -4,6 +4,7 @@ import { Home } from "./pages/Home/Home";
 import { Settings } from "./pages/Settings/Settings";
 import { History } from "./pages/History/History";
 import { theme } from "./styles";
+import { Quiz } from "./components/Quiz/Quiz";
 
 function App() {
   return (
@@ -13,11 +14,13 @@ function App() {
           <h1>Dictionary Nav</h1>
           <Link to="/">Home</Link>
           <Link to="/history">History</Link>
+          <Link to="/quiz">Quiz</Link>
           <Link to="/settings">Settings</Link>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
+          <Route path="/quiz" element={<Quiz />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </BrowserRouter>

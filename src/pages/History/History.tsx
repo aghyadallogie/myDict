@@ -28,20 +28,18 @@ export const History: FC = () => {
 
   const renderWords = () => {
     if (allWords.length > 0) {
-      return allWords.reverse().map((word: Word) => {
-        return (
-          <styles.Table key={word.id} onClick={() => alert(word.id)}>
-            {word.translations.map((trans: Translation) => (
-              <styles.Row key={trans.lang}>
-                <span
-                  className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}
-                ></span>
-                <span>{trans.lingo}</span>
-              </styles.Row>
-            ))}
-          </styles.Table>
-        );
-      });
+      return allWords.reverse().map((word: Word) => (
+        <styles.Table key={word.id} onClick={() => alert(word.id)}>
+          {word.translations.map((trans: Translation) => (
+            <styles.Row key={trans.lang}>
+              <span
+                className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}
+              ></span>
+              <span>{trans.lingo}</span>
+            </styles.Row>
+          ))}
+        </styles.Table>
+      ));
     } else {
       return <h1 style={{ textAlign: "center" }}>L o a d i n g . . .</h1>;
     }
