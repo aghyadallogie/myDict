@@ -5,6 +5,14 @@ import { styles } from "../../components/TargetWord/TargetWord.styles";
 import { bindActionCreators } from "redux";
 import { userActions } from "../../store/actions";
 import { useDispatch } from "react-redux";
+import { Translation } from "../../components/TargetWord/TargetWord";
+
+export type Word = {
+  id: number;
+  created_at: string;
+  created_by: number;
+  translations: Translation[];
+};
 
 export const History: FC = () => {
   const dispatch = useDispatch();
@@ -18,13 +26,12 @@ export const History: FC = () => {
     loadUserAction();
   }, []);
 
-
   const renderWords = () => {
     if (allWords.length > 0) {
-      return allWords.reverse().map((word: any) => {
+      return allWords.reverse().map((word: Word) => {
         return (
           <styles.Table key={word.id} onClick={() => alert(word.id)}>
-            {word.translations.map((trans: any) => (
+            {word.translations.map((trans: Translation) => (
               <styles.Row key={trans.lang}>
                 <span
                   className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}

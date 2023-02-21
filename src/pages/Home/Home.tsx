@@ -5,17 +5,6 @@ import { TargetWord } from "../../components/TargetWord/TargetWord";
 import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 
-type User = {
-  userId: number;
-  username: string;
-  languages: string[];
-};
-
-type Lingo = {
-  userWords: any[];
-  targetWord: any;
-};
-
 // user auth
 // &source_lang=${srcLang}
 // todo / notes

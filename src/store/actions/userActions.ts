@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { Translation } from "../../components/TargetWord/TargetWord";
 import supabase from "../../config/supabaseClient";
 import { ActionTypes } from "./types";
 import { Action } from "./types";
@@ -20,7 +21,7 @@ export const loadUserAction = () => async (dispatch: Dispatch<Action>) => {
 };
 
 export const updateTargetWordAction =
-  (word: any[]) => async (dispatch: Dispatch<Action>) => {
+  (word: Translation[]) => async (dispatch: Dispatch<Action>) => {
     const { data, error } = await supabase
       .from("words")
       .insert([

@@ -9,6 +9,11 @@ export type Styles = {
   Row: any;
 };
 
+export type Translation = {
+  lang: string;
+  lingo: string;
+};
+
 export const TargetWord: FC = () => {
   const targetWord = useSelector(
     (state: RootState) => state.authenticatedUser.targetWord
@@ -18,7 +23,7 @@ export const TargetWord: FC = () => {
     <styles.Wrapper>
       {targetWord?.created_at && (
         <styles.Table>
-          {targetWord.translations.map((translation: any) => (
+          {targetWord.translations.map((translation: Translation) => (
             <styles.Row key={translation.lang}>
               <span
                 className={`fi fi-${
