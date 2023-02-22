@@ -1,4 +1,4 @@
-import { FC, useRef, KeyboardEvent } from "react";
+import { FC, useRef, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -8,7 +8,7 @@ import { RootState } from "../../store/reducers";
 import { styles } from "./TranslateBox.styles";
 
 export type Styles = {
-  TranslateBox: any;
+  StyledForm: any;
   Input: any;
   Button: any;
 };
@@ -22,7 +22,7 @@ export const TranslateBox: FC = () => {
     (state: RootState) => state.authenticatedUser.user.languages
   );
 
-  const handleClick = async (event: KeyboardEvent) => {
+  const handleClick = async (event: FormEvent) => {
     event.preventDefault();
     const translations = await translateWordToLangs(
       inputRef.current!.value,
@@ -33,9 +33,9 @@ export const TranslateBox: FC = () => {
   };
 
   return (
-    <styles.TranslateBox onSubmit={handleClick}>
+    <styles.StyledForm onSubmit={handleClick}>
       <styles.Input ref={inputRef} placeholder="word to translate" />
       <styles.Button type="submit">Translate</styles.Button>
-    </styles.TranslateBox>
+    </styles.StyledForm>
   );
 };

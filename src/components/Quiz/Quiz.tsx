@@ -85,6 +85,7 @@ export const Quiz = () => {
           <h3 style={{ textAlign: "center" }}>
             You are on a streak of{" "}
             <span style={{ color: "orange" }}>{streak}</span>{" "}
+            correct answers!
           </h3>
         </>
       );
