@@ -15,7 +15,7 @@ const langs = [
   { code: "it", flag: "fi fi-it" },
   { code: "es", flag: "fi fi-es" },
   { code: "no", flag: "fi fi-no" },
-  { code: "pl", flag: "fi fi-pl" },
+  { code: "bg", flag: "fi fi-bg" },
   { code: "pt", flag: "fi fi-pt" },
   { code: "ru", flag: "fi fi-ru" },
   { code: "tr", flag: "fi fi-tr" },

@@ -1,23 +1,29 @@
 import { useState, FormEvent, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 import { styles } from "../../components/TranslateBox/TranslateBox.styles";
-import supabase from "../../config/supabaseClient";
+import { userActions } from "../../store/actions";
 
 export const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+  const { loginUserAction, registerUserAction } = bindActionCreators(userActions, dispatch);
+
+  // userId = c41bfbc3-292e-4b6b-877c-1a0959730403
   // login action creator and reducer
+
+  // on update settings save in supabse
+  // for that we need userId
+  // for that we need to Authenticate:
+  // a) no account? show settings -> set settings in localStorage and supabase
+  // b) exists -> load settings along with the rest of data
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
-    console.log('a) ', email, password);
-    const { error, data } = await supabase.auth.signUp({ email, password });
-
-    if (error) {
-      console.log("Registration error: ", error);
-    }
-
-    console.log('b) ', data);
+    loginUserAction({ email, password });
+    // registerUserAction({ email, password });
   };
 
   return (

@@ -5,6 +5,7 @@ export enum ActionTypes {
   USER_LOADING = "USER_LOADING",
   UPDATE_USER_LANGUAGES = "UPDATE_USER_LANGUAGES",
   UPDATE_TARGET_WORD = "UPDATE_TARGET_WORD",
+  SIGN_IN_USER = "SIGN_IN_USER",
 }
 
 export interface UpdatingTargetWord extends AnyAction {

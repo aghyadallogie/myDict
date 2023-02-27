@@ -4,13 +4,21 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   errorMessage: "",
-  user: { userId: 0, username: "test", languages: ["de"], streak: 0 },
   targetWord: {},
   words: [],
+  user: { username: "test", languages: ["de"], streak: 0 },
 };
+
+// Home useEffect loads user.languages from settings
 
 export default function (state = initialState, action: Action) {
   switch (action.type) {
+    case ActionTypes.SIGN_IN_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: { ...action.payload?.user, ...state.user },
+      };
     case ActionTypes.USER_LOADING:
       return {
         ...state,
