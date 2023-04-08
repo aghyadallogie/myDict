@@ -6,28 +6,27 @@ import { bindActionCreators } from "redux";
 import { userActions } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import { Translation } from "../../components/TargetWord/TargetWord";
-
-export type Word = {
-  id: number;
-  created_at: string;
-  created_by: number;
-  translations: Translation[];
-};
+import { Navigate } from "react-router-dom";
+import { Word } from "../../types";
 
 export const History: FC = () => {
   const dispatch = useDispatch();
   const { loadUserAction } = bindActionCreators(userActions, dispatch);
 
   const allWords = useSelector(
-    (state: RootState) => state.authenticatedUser.words
+    (state: RootState) => state.authenticatedUser.words.words
   );
 
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
+  
   useEffect(() => {
-    loadUserAction();
+    loadUserAction(user.id);
   }, []);
 
+  if (!user.id) return <Navigate to="/" />;
+
   const renderWords = () => {
-    if (allWords.length > 0) {
+    if (allWords?.length > 0) {
       return allWords.reverse().map((word: Word) => (
         <styles.Table key={word.id} onClick={() => alert(word.id)}>
           {word.translations.map((trans: Translation) => (

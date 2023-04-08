@@ -14,11 +14,13 @@ const initialState = {
 export default function (state = initialState, action: Action) {
   switch (action.type) {
     case ActionTypes.SIGN_IN_USER:
-      return {
+      const newState = {
         ...state,
         isAuthenticated: true,
         user: { ...action.payload?.user, ...state.user },
       };
+      localStorage.setItem("user", JSON.stringify(newState.user));
+      return newState;
     case ActionTypes.USER_LOADING:
       return {
         ...state,
@@ -31,7 +33,7 @@ export default function (state = initialState, action: Action) {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        targetWord: action.payload[action.payload.length - 1],
+        targetWord: action.payload.words[action.payload.words.length - 1],
         words: action.payload,
       };
       return loadedState;
@@ -72,6 +74,10 @@ export default function (state = initialState, action: Action) {
         ...state,
         user: { ...state.user, streak: 0 },
       };
+    case ActionTypes.LOGOUT_USER:
+      // should not be removed but updated to nullify id
+      localStorage.removeItem("user");
+      return initialState;
     default:
       return state;
   }

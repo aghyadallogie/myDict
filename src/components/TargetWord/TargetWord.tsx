@@ -21,6 +21,8 @@ export const TargetWord: FC = () => {
 
   return (
     <styles.Wrapper>
+      <h2 style={{ marginBottom: "2rem" }}>The Latest Word You Translated:</h2>
+
       {targetWord?.created_at && (
         <styles.Table>
           {targetWord.translations.map((translation: Translation) => (

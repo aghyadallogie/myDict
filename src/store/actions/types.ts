@@ -6,6 +6,7 @@ export enum ActionTypes {
   UPDATE_USER_LANGUAGES = "UPDATE_USER_LANGUAGES",
   UPDATE_TARGET_WORD = "UPDATE_TARGET_WORD",
   SIGN_IN_USER = "SIGN_IN_USER",
+  LOGOUT_USER = "LOGOUT_USER",
 }
 
 export interface UpdatingTargetWord extends AnyAction {

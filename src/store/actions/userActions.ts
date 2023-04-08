@@ -24,8 +24,6 @@ export const registerUserAction =
     }
 
     if (data) {
-      // console.log("action->", data);
-
       return dispatch({
         type: ActionTypes.SIGN_IN_USER,
         payload: data,
@@ -46,8 +44,6 @@ export const loginUserAction =
     }
 
     if (data) {
-      console.log("action->", data);
-
       return dispatch({
         type: ActionTypes.SIGN_IN_USER,
         payload: data,
@@ -62,41 +58,46 @@ export const loadUserAction =
     const { data: words, error: wordsError } = await supabase
       .from("words")
       .select();
+
     const { data: settings, error: settingsError } = await supabase
       .from("settings")
-      .select("*")
+      .select()
       .eq("userId", userId);
-
-    console.log("333", settings);
 
     const errors = [wordsError, settingsError];
 
-    if (errors.length) {
+    if (errors[0]) {
       console.log(errors);
     }
 
     if (words) {
       return dispatch({
         type: ActionTypes.USER_LOADED,
-        payload: { words, settings },
+        payload: { words, settings: settings![0]?.userSettings },
       });
     }
   };
 
 export const updateSettingsAction =
-  (settings: Settings) => async (dispatch: Dispatch<Action>) => {
+  (settings?: Settings) => async (dispatch: Dispatch<Action>) => {
+
+    console.log(settings);
+
     const { data, error } = await supabase
       .from("settings")
-      .select("*")
-      .eq("id", settings.userId);
+      .update({ userSettings: { languages: settings?.userLanguages } })
+      .eq("userId", settings?.userId);
 
     if (error) {
       console.log(error);
     }
 
+    console.log(data);
+    
+
     if (data) {
       return dispatch({
-        type: ActionTypes.USER_LOADED,
+        type: ActionTypes.UPDATE_USER_LANGUAGES,
         payload: data,
       });
     }

@@ -1,18 +1,23 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { styles } from "../../components/TranslateBox/TranslateBox.styles";
 import { userActions } from "../../store/actions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducers";
 
 export const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const { loginUserAction, registerUserAction } = bindActionCreators(userActions, dispatch);
+  const { loginUserAction, registerUserAction } = bindActionCreators(
+    userActions,
+    dispatch
+  );
 
-  // userId = c41bfbc3-292e-4b6b-877c-1a0959730403
-  // login action creator and reducer
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   // on update settings save in supabse
   // for that we need userId
@@ -26,12 +31,16 @@ export const LandingPage = () => {
     // registerUserAction({ email, password });
   };
 
+  // const user = JSON.parse(localStorage.getItem('user') || '');
+
+  if (user.id) return <Navigate to="/home" />;
+
   return (
     <div
       className="page"
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <h2>Sign Up</h2>
+      <h2>Personalized Dictionary</h2>
       <div style={{ width: "80%", height: "100%", margin: "2rem auto 6rem" }}>
         <styles.StyledForm
           style={{ flexDirection: "column" }}
@@ -55,7 +64,7 @@ export const LandingPage = () => {
         </styles.StyledForm>
       </div>
       <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
-        You have an account already ? Just Login
+        If you do not have an account already ? Register
       </span>
     </div>
   );

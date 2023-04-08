@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Word } from "../../pages/History/History";
+import { Word } from "../../types";
 import { RootState } from "../../store/reducers";
 import { Translation } from "../TargetWord/TargetWord";
 import { styles } from "../TargetWord/TargetWord.styles";
+import { Navigate } from "react-router-dom";
 
 export const Quiz = () => {
   const dispatch = useDispatch();
   const [correct, setCorrect] = useState(false);
+
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   const userLangs = useSelector(
     (state: RootState) => state.authenticatedUser.user.languages
@@ -19,10 +22,13 @@ export const Quiz = () => {
   );
 
   const allWords = useSelector(
-    (state: RootState) => state.authenticatedUser.words
+    (state: RootState) => state.authenticatedUser.words.words
   );
 
   const rnd = Math.floor(Math.random() * allWords.length);
+
+  if (!user.id) return <Navigate to="/" />;
+
   const randomEnWord = allWords[rnd]?.translations;
   const randomLang = userLangs[Math.floor(Math.random() * userLangs.length)];
 
@@ -34,7 +40,9 @@ export const Quiz = () => {
     allWords[rnd + 1],
     allWords[rnd + 2],
     allWords[rnd + 3],
-  ];
+  ].filter((val) => val !== undefined);
+
+  // if a translation doesnt exist in a certain language it shouldnt ask it in that language
 
   const options = randomOptions.map((option: Word) =>
     option?.translations.filter(
@@ -43,9 +51,10 @@ export const Quiz = () => {
   );
 
   const handleAnswer = (answer: string) => {
+
     if (
       answer ===
-      randomEnWord?.filter((rw: any) => rw.lang === randomLang)[0].lingo
+      randomEnWord?.filter((rw: any) => rw.lang === randomLang)[0]?.lingo
     ) {
       setCorrect(!correct);
       dispatch({ type: "UP_STREAK" });
@@ -56,11 +65,14 @@ export const Quiz = () => {
 
   const renderOptions = () => {
     return options.map((opt) => {
-      if (opt)
+      if (opt && opt[0] && opt[0].lingo)
         return (
           <styles.Row
             key={opt[0].lingo}
-            onClick={() => handleAnswer(opt[0].lingo)}
+            onClick={() => {
+              handleAnswer(opt[0].lingo);
+              console.log(opt[0].lingo);
+            }}
           >
             {opt[0].lingo}
           </styles.Row>
@@ -84,8 +96,7 @@ export const Quiz = () => {
           <styles.Table>{renderOptions()}</styles.Table>
           <h3 style={{ textAlign: "center" }}>
             You are on a streak of{" "}
-            <span style={{ color: "orange" }}>{streak}</span>{" "}
-            correct answers!
+            <span style={{ color: "orange" }}>{streak}</span> correct answers!
           </h3>
         </>
       );

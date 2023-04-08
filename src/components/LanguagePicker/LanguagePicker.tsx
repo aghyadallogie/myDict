@@ -22,7 +22,9 @@ const langs = [
 ];
 
 export const LanguagePicker = () => {
-  const user = useSelector((state: RootState) => state.authenticatedUser.user);
+  const userLangs: string[] = useSelector(
+    (state: RootState) => state.authenticatedUser.user.languages
+  );
 
   const dispatch = useDispatch();
 
@@ -38,7 +40,7 @@ export const LanguagePicker = () => {
       {langs.map((lang) => (
         <styles.Flag
           key={lang.code}
-          picked={user.languages.includes(lang.code) ? true : false}
+          picked={userLangs.includes(lang.code) ? true : false}
           onClick={() => toggleLanguage(lang.code)}
           className={lang.flag}
         />

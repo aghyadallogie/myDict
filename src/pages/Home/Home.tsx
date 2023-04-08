@@ -1,28 +1,33 @@
 import { FC, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { TargetWord } from "../../components/TargetWord/TargetWord";
 import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 
-// user auth
 // &source_lang=${srcLang}
 // todo / notes
 // fetch and load user settings
+
+// history based on user ?
+// reset input after translate
+// settings coming from supabase ?
+
+// prevent double translate
 
 export const Home: FC = () => {
   const dispatch = useDispatch();
   const { loadUserAction } = bindActionCreators(userActions, dispatch);
   
-  const authenticatedUser = useSelector((state: RootState) => state.authenticatedUser);
-  
-  const userId = "50f223ea-6fe8-4984-bd0d-16e1f66ec8b8"
-
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   useEffect(() => {
-    loadUserAction(userId);
+    loadUserAction(user.id);
   }, []);
+
+  if (!user.id) return <Navigate to="/" />;
 
   return (
     <div className="page home">
