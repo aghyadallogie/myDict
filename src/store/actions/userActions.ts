@@ -40,7 +40,10 @@ export const loginUserAction =
     });
 
     if (error) {
-      console.log(error);
+      return dispatch({
+        type: ActionTypes.AUTH_ERROR,
+        payload: error,
+      });
     }
 
     if (data) {
@@ -57,7 +60,8 @@ export const loadUserAction =
 
     const { data: words, error: wordsError } = await supabase
       .from("words")
-      .select();
+      .select()
+      .eq("created_by", userId);
 
     const { data: settings, error: settingsError } = await supabase
       .from("settings")
@@ -104,12 +108,12 @@ export const updateSettingsAction =
   };
 
 export const updateTargetWordAction =
-  (word: Translation[]) => async (dispatch: Dispatch<Action>) => {
+  (word: Translation[], userId: string) => async (dispatch: Dispatch<Action>) => {
     const { data, error } = await supabase
       .from("words")
       .insert([
         {
-          created_by: 0,
+          created_by: userId,
           translations: word,
         },
       ])

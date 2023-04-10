@@ -8,8 +8,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers";
 
 export const LandingPage = () => {
+  const [slide, setSlide] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatedPassword, setRepeatedPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const dispatch = useDispatch();
   const { loginUserAction, registerUserAction } = bindActionCreators(
@@ -18,6 +21,9 @@ export const LandingPage = () => {
   );
 
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
+  const errorMessage = useSelector(
+    (state: RootState) => state.authenticatedUser.errorMessage
+  );
 
   // on update settings save in supabse
   // for that we need userId
@@ -27,8 +33,11 @@ export const LandingPage = () => {
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
-    loginUserAction({ email, password });
-    // registerUserAction({ email, password });
+    if (slide === "login") loginUserAction({ email, password });
+    else if (password === repeatedPassword)
+      registerUserAction({ email, password });
+      else
+      setPasswordError("Passwords do not match!")
   };
 
   // const user = JSON.parse(localStorage.getItem('user') || '');
@@ -41,7 +50,9 @@ export const LandingPage = () => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <h2>Personalized Dictionary</h2>
-      <div style={{ width: "80%", height: "100%", margin: "2rem auto 6rem" }}>
+      <div style={{ width: "80%", height: "100%", margin: "0 auto 6rem" }}>
+        <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
+        <styles.ErrorMessage>{passwordError}</styles.ErrorMessage>
         <styles.StyledForm
           style={{ flexDirection: "column" }}
           onSubmit={handleLogin}
@@ -53,6 +64,7 @@ export const LandingPage = () => {
             }
             placeholder="Enter Email"
           />
+
           <styles.Input
             type="password"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -60,12 +72,49 @@ export const LandingPage = () => {
             }
             placeholder="Enter Password"
           />
-          <styles.Button style={{ margin: "0" }}>Register</styles.Button>
+
+          {slide === "register" && (
+            <styles.Input
+              type="password"
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setRepeatedPassword(e.target.value)
+              }
+              placeholder="Repeat Password"
+            />
+          )}
+
+          {slide === "login" && (
+            <styles.Button style={{ margin: "0" }}>Login</styles.Button>
+          )}
+          {slide === "register" && (
+            <styles.Button style={{ margin: "0" }}>Register</styles.Button>
+          )}
         </styles.StyledForm>
       </div>
-      <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
-        If you do not have an account already ? Register
-      </span>
+      <div>
+        {slide === "login" && (
+          <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
+            If you do not have an account already ?{" "}
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setSlide("register")}
+            >
+              Register
+            </span>
+          </span>
+        )}
+        {slide === "register" && (
+          <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
+            Do you have an account already ?{" "}
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setSlide("login")}
+            >
+              Login
+            </span>
+          </span>
+        )}
+      </div>
     </div>
   );
 };

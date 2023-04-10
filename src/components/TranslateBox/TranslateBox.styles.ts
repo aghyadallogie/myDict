@@ -32,3 +32,11 @@ styles.Button = styled.button`
     outline: 1px solid green;
   }
 `;
+
+styles.ErrorMessage = styled.h3`
+  height: 2rem;
+  margin: 1rem 0;
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+`

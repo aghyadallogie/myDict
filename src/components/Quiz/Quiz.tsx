@@ -32,22 +32,35 @@ export const Quiz = () => {
     (state: RootState) => state.authenticatedUser.words.words
   );
 
-  const rnd = Math.floor(Math.random() * allWords?.length);
+  let rnd = Math.floor(Math.random() * allWords?.length);
 
   if (!user.id) return <Navigate to="/" />;
 
-  const randomEnWord = allWords[rnd]?.translations;
-  const randomLang = userLangs[Math.floor(Math.random() * userLangs.length)];
+  const randomEnWord = allWords?.length
+    ? allWords[rnd]?.translations
+    : [{ id: 0, translations: [] }];
+  const randomLang = userLangs[Math.floor(Math.random() * userLangs?.length)];
 
-  const randomOptions = [
-    allWords[rnd - 3],
-    allWords[rnd - 2],
-    allWords[rnd - 1],
-    allWords[rnd],
-    allWords[rnd + 1],
-    allWords[rnd + 2],
-    allWords[rnd + 3],
-  ].filter((val) => val !== undefined);
+  if (isNaN(rnd)) {
+    // Handle the error here, e.g. by setting rnd to a default value
+    rnd = 3;
+  }
+
+  let randomOptions;
+
+  if (allWords?.length > 0) {
+    randomOptions = [
+      allWords[rnd - 3],
+      allWords[rnd - 2],
+      allWords[rnd - 1],
+      allWords[rnd],
+      allWords[rnd + 1],
+      allWords[rnd + 2],
+      allWords[rnd + 3],
+    ].filter((val) => val !== undefined);
+  } else {
+    randomOptions = []
+  }
 
   // if a translation doesnt exist in a certain language it shouldnt ask it in that language
 
@@ -87,7 +100,7 @@ export const Quiz = () => {
   };
 
   const renderQuiz = () => {
-    if (allWords.length > 10) {
+    if (allWords?.length > 10) {
       return (
         <>
           <h3>

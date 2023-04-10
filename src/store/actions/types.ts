@@ -7,6 +7,9 @@ export enum ActionTypes {
   UPDATE_TARGET_WORD = "UPDATE_TARGET_WORD",
   SIGN_IN_USER = "SIGN_IN_USER",
   LOGOUT_USER = "LOGOUT_USER",
+  AUTH_ERROR = "AUTH_ERROR",
+  UP_STREAK = "UP_STREAK",
+  RESET_STREAK = "RESET_STREAK"
 }
 
 export interface UpdatingTargetWord extends AnyAction {

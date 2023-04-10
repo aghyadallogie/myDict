@@ -4,6 +4,7 @@ import { Word } from "../../types";
 
 export interface RootState {
   authenticatedUser: {
+    errorMessage: any;
     // Define the properties of the authenticatedUser slice of state here
     user: {
       id: string;

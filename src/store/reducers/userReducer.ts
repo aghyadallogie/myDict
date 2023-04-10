@@ -6,7 +6,7 @@ const initialState = {
   errorMessage: "",
   targetWord: {},
   words: [],
-  user: { username: "test", languages: ["de"], streak: 0 },
+  user: { username: "", languages: ["de"], streak: 0 },
 };
 
 // Home useEffect loads user.languages from settings
@@ -60,24 +60,32 @@ export default function (state = initialState, action: Action) {
         localStorage.setItem("user", JSON.stringify(updatedState.user));
         return updatedState;
       }
+
     case ActionTypes.UPDATE_TARGET_WORD:
       const updatedState = { ...state, targetWord: action.payload };
       return updatedState;
 
-    case "UP_STREAK":
+    case ActionTypes.UP_STREAK:
       return {
         ...state,
         user: { ...state.user, streak: state.user.streak + 1 },
       };
-    case "RESET_STREAK":
+
+    case ActionTypes.RESET_STREAK:
       return {
         ...state,
         user: { ...state.user, streak: 0 },
       };
+
     case ActionTypes.LOGOUT_USER:
       // should not be removed but updated to nullify id
       localStorage.removeItem("user");
       return initialState;
+
+    case ActionTypes.AUTH_ERROR:
+      console.log("ppp", action.payload);
+      return { ...state, errorMessage: action.payload.message };
+
     default:
       return state;
   }

@@ -17,6 +17,10 @@ h3 {
   margin: 0;
 }
 
+span {
+  display: inline
+}
+
 body {
   width: 100%;
   height: 100vh;

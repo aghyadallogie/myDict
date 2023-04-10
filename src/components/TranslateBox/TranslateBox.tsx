@@ -11,9 +11,11 @@ export type Styles = {
   StyledForm: any;
   Input: any;
   Button: any;
+  ErrorMessage: any;
 };
 
 export const TranslateBox: FC = () => {
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const { updateTargetWordAction } = bindActionCreators(userActions, dispatch);
@@ -29,7 +31,8 @@ export const TranslateBox: FC = () => {
       userLanguages
     );
 
-    updateTargetWordAction(translations);
+    updateTargetWordAction(translations, user?.id);
+    inputRef.current!.value = "";
   };
 
   return (
