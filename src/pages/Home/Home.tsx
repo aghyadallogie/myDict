@@ -20,7 +20,7 @@ import { RootState } from "../../store/reducers";
 export const Home: FC = () => {
   const dispatch = useDispatch();
   const { loadUserAction } = bindActionCreators(userActions, dispatch);
-  
+
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   useEffect(() => {

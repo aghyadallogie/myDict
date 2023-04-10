@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Word } from "../../types";
@@ -6,12 +6,19 @@ import { RootState } from "../../store/reducers";
 import { Translation } from "../TargetWord/TargetWord";
 import { styles } from "../TargetWord/TargetWord.styles";
 import { Navigate } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { userActions } from "../../store/actions";
 
 export const Quiz = () => {
   const dispatch = useDispatch();
   const [correct, setCorrect] = useState(false);
+  const { loadUserAction } = bindActionCreators(userActions, dispatch);
 
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
+
+  useEffect(() => {
+    loadUserAction(user.id);
+  }, []);
 
   const userLangs = useSelector(
     (state: RootState) => state.authenticatedUser.user.languages
@@ -25,7 +32,7 @@ export const Quiz = () => {
     (state: RootState) => state.authenticatedUser.words.words
   );
 
-  const rnd = Math.floor(Math.random() * allWords.length);
+  const rnd = Math.floor(Math.random() * allWords?.length);
 
   if (!user.id) return <Navigate to="/" />;
 
@@ -51,7 +58,6 @@ export const Quiz = () => {
   );
 
   const handleAnswer = (answer: string) => {
-
     if (
       answer ===
       randomEnWord?.filter((rw: any) => rw.lang === randomLang)[0]?.lingo
