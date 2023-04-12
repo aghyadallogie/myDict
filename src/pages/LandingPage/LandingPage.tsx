@@ -25,22 +25,13 @@ export const LandingPage = () => {
     (state: RootState) => state.authenticatedUser.errorMessage
   );
 
-  // on update settings save in supabse
-  // for that we need userId
-  // for that we need to Authenticate:
-  // a) no account? show settings -> set settings in localStorage and supabase
-  // b) exists -> load settings along with the rest of data
-
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     if (slide === "login") loginUserAction({ email, password });
     else if (password === repeatedPassword)
       registerUserAction({ email, password });
-      else
-      setPasswordError("Passwords do not match!")
+    else setPasswordError("Passwords do not match!");
   };
-
-  // const user = JSON.parse(localStorage.getItem('user') || '');
 
   if (user.id) return <Navigate to="/home" />;
 

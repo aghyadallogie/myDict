@@ -15,10 +15,13 @@ export type Styles = {
 };
 
 export const TranslateBox: FC = () => {
-  const user = useSelector((state: RootState) => state.authenticatedUser.user);
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const { updateTargetWordAction } = bindActionCreators(userActions, dispatch);
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
+  const allWords = useSelector(
+    (state: RootState) => state.authenticatedUser.words.words
+  );
 
   const userLanguages = useSelector(
     (state: RootState) => state.authenticatedUser.user.languages
@@ -26,12 +29,21 @@ export const TranslateBox: FC = () => {
 
   const handleClick = async (event: FormEvent) => {
     event.preventDefault();
-    const translations = await translateWordToLangs(
-      inputRef.current!.value,
-      userLanguages
-    );
 
-    updateTargetWordAction(translations, user?.id);
+    if (
+      allWords.find(
+        (word: any) => word.translations[0].lingo === inputRef.current!.value
+      )
+    ) {
+      alert("Word was already translated!");
+    } else {
+      const translations = await translateWordToLangs(
+        inputRef.current!.value,
+        userLanguages
+      );
+      updateTargetWordAction(translations, user?.id);
+    }
+
     inputRef.current!.value = "";
   };
 

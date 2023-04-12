@@ -9,13 +9,10 @@ import { RootState } from "../../store/reducers";
 
 // &source_lang=${srcLang}
 // todo / notes
+
 // fetch and load user settings
-
 // history based on user ?
-// reset input after translate
 // settings coming from supabase ?
-
-// prevent double translate
 
 export const Home: FC = () => {
   const dispatch = useDispatch();
