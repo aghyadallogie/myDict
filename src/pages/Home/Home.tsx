@@ -6,13 +6,16 @@ import { TargetWord } from "../../components/TargetWord/TargetWord";
 import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
+import { Navbar } from "../../components/Navbar/Navbar";
 
 // &source_lang=${srcLang}
 // todo / notes
-
+// active tab
 // fetch and load user settings
 // history based on user ?
 // settings coming from supabase ?
+// isolate translate logic
+// use valid langs
 
 export const Home: FC = () => {
   const dispatch = useDispatch();
@@ -27,9 +30,9 @@ export const Home: FC = () => {
   if (!user.id) return <Navigate to="/" />;
 
   return (
-    <div className="page home">
+    <>
       <TranslateBox />
       <TargetWord />
-    </div>
+    </>
   );
 };

@@ -6,13 +6,17 @@ import { translateWordToLangs } from "../../helpers";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 import { styles } from "./TranslateBox.styles";
+import { StyledComponent } from "styled-components";
+import { MdOutlineTranslate } from "react-icons/md";
 
 export type Styles = {
-  StyledForm: any;
-  Input: any;
-  Button: any;
-  ErrorMessage: any;
+  StyledForm: StyledComponent<"form", any>; // Replace 'any' with specific props if needed
+  Input: StyledComponent<"input", any>; // Replace 'any' with specific props if needed
+  Button: StyledComponent<"button", any>; // Replace 'any' with specific props if needed
+  ErrorMessage: StyledComponent<"h3", any>; // Replace 'any' with specific props if needed
 };
+
+// prevent empty translation
 
 export const TranslateBox: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,8 +31,13 @@ export const TranslateBox: FC = () => {
     (state: RootState) => state.authenticatedUser.user.languages
   );
 
-  const handleClick = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (inputRef && inputRef.current) {
+      if (!inputRef.current.value)
+        return alert("Please enter a word to translate!");
+    }
 
     if (
       allWords.find(
@@ -48,9 +57,11 @@ export const TranslateBox: FC = () => {
   };
 
   return (
-    <styles.StyledForm onSubmit={handleClick}>
+    <styles.StyledForm onSubmit={handleSubmit}>
       <styles.Input ref={inputRef} placeholder="word to translate" />
-      <styles.Button type="submit">Translate</styles.Button>
+      <styles.Button type="submit" style={{ padding: 0 }}>
+        <MdOutlineTranslate size={"1.5rem"} />
+      </styles.Button>
     </styles.StyledForm>
   );
 };

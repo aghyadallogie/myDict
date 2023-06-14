@@ -59,7 +59,7 @@ export const Quiz = () => {
       allWords[rnd + 3],
     ].filter((val) => val !== undefined);
   } else {
-    randomOptions = []
+    randomOptions = [];
   }
 
   // if a translation doesnt exist in a certain language it shouldnt ask it in that language
@@ -121,10 +121,12 @@ export const Quiz = () => {
       );
     } else {
       return (
-        <h2>You do not have enough translations in order to play the quiz!</h2>
+        <h5 style={{ marginTop: "5rem", padding: "3rem", textAlign: "center" }}>
+          You do not have enough translations in order to play the quiz!
+        </h5>
       );
     }
   };
 
-  return <div className="page">{renderQuiz()}</div>;
+  return <>{renderQuiz()}</>;
 };

@@ -19,6 +19,12 @@ const langs = [
   { code: "pt", flag: "fi fi-pt" },
   { code: "ru", flag: "fi fi-ru" },
   { code: "tr", flag: "fi fi-tr" },
+  { code: "hu", flag: "fi fi-hu" },
+  { code: "hr", flag: "fi fi-hr" },
+  { code: "gr", flag: "fi fi-gr" },
+  { code: "ro", flag: "fi fi-ro" },
+  { code: "sy", flag: "fi fi-sy" },
+  { code: "jp", flag: "fi fi-jp" },
 ];
 
 export const LanguagePicker = () => {

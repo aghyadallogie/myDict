@@ -16,13 +16,8 @@ export const Settings: FC = () => {
   useEffect(() => {
     loadUserAction(user.id);
   }, []);
-  
 
   if (!user.id) return <Navigate to="/" />;
 
-  return (
-    <div className="page settings">
-      <LanguagePicker />
-    </div>
-  );
+  return <LanguagePicker />;
 };

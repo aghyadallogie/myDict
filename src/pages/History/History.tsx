@@ -18,7 +18,7 @@ export const History: FC = () => {
   );
 
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
-  
+
   useEffect(() => {
     loadUserAction(user.id);
   }, []);
@@ -44,5 +44,5 @@ export const History: FC = () => {
     }
   };
 
-  return <div className="page history">{renderWords()}</div>;
+  return <>{renderWords()}</>;
 };

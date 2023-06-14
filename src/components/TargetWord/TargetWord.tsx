@@ -21,7 +21,11 @@ export const TargetWord: FC = () => {
 
   return (
     <styles.Wrapper>
-      <h2 style={{ marginBottom: "2rem" }}>The Latest Word You Translated:</h2>
+      <h4
+        style={{ marginBottom: "2rem", textAlign: "center", fontWeight: 500 }}
+      >
+        The Latest Word You Translated:
+      </h4>
 
       {targetWord?.created_at && (
         <styles.Table>

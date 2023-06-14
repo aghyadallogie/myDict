@@ -20,7 +20,10 @@ export const registerUserAction =
     const { error, data } = await supabase.auth.signUp({ email, password });
 
     if (error) {
-      console.log(error);
+      return dispatch({
+        type: ActionTypes.AUTH_ERROR,
+        payload: error,
+      });
     }
 
     if (data) {
@@ -71,7 +74,10 @@ export const loadUserAction =
     const errors = [wordsError, settingsError];
 
     if (errors[0]) {
-      console.log(errors);
+      return dispatch({
+        type: ActionTypes.AUTH_ERROR,
+        payload: errors[0],
+      });
     }
 
     if (words) {

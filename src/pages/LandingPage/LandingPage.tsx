@@ -37,15 +37,14 @@ export const LandingPage = () => {
 
   return (
     <div
-      className="page"
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center", height: '100%', marginTop: '40px' }}
     >
-      <h2>Personalized Dictionary</h2>
+      <h3>Personalized Dictionary</h3>
       <div style={{ width: "80%", height: "100%", margin: "0 auto 6rem" }}>
         <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
         <styles.ErrorMessage>{passwordError}</styles.ErrorMessage>
         <styles.StyledForm
-          style={{ flexDirection: "column" }}
+          style={{ flexDirection: "column", gap: "2rem", paddingBottom: '5rem' }}
           onSubmit={handleLogin}
         >
           <styles.Input
@@ -75,19 +74,23 @@ export const LandingPage = () => {
           )}
 
           {slide === "login" && (
-            <styles.Button style={{ margin: "0" }}>Login</styles.Button>
+            <styles.Button style={{ margin: "0", alignSelf: "center", width: 'auto' }}>
+              Login
+            </styles.Button>
           )}
           {slide === "register" && (
-            <styles.Button style={{ margin: "0" }}>Register</styles.Button>
+            <styles.Button style={{ margin: "0", alignSelf: "center", width: 'auto' }}>
+              Register
+            </styles.Button>
           )}
         </styles.StyledForm>
       </div>
       <div>
         {slide === "login" && (
-          <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
+          <span style={{fontSize: '.8rem'}}>
             If you do not have an account already ?{" "}
             <span
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", borderBottom: '1px solid gray' }}
               onClick={() => setSlide("register")}
             >
               Register
@@ -95,10 +98,10 @@ export const LandingPage = () => {
           </span>
         )}
         {slide === "register" && (
-          <span style={{ borderTop: "1px solid silver", paddingTop: "0.5rem" }}>
+          <span style={{fontSize: '.8rem'}}>
             Do you have an account already ?{" "}
             <span
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", borderBottom: '1px solid gray' }}
               onClick={() => setSlide("login")}
             >
               Login
