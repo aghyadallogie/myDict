@@ -14,21 +14,21 @@ const langs = [
   { code: "fr", flag: "fi fi-fr" },
   { code: "it", flag: "fi fi-it" },
   { code: "es", flag: "fi fi-es" },
-  { code: "no", flag: "fi fi-no" },
+  { code: "sv", flag: "fi fi-se" },
   { code: "bg", flag: "fi fi-bg" },
   { code: "pt", flag: "fi fi-pt" },
   { code: "ru", flag: "fi fi-ru" },
   { code: "tr", flag: "fi fi-tr" },
   { code: "hu", flag: "fi fi-hu" },
-  { code: "hr", flag: "fi fi-hr" },
-  { code: "gr", flag: "fi fi-gr" },
+  { code: "el", flag: "fi fi-gr" },
+  { code: "pl", flag: "fi fi-pl" },
   { code: "ro", flag: "fi fi-ro" },
-  { code: "sy", flag: "fi fi-sy" },
-  { code: "jp", flag: "fi fi-jp" },
+  { code: "uk", flag: "fi fi-ua" },
+  { code: "ja", flag: "fi fi-jp" },
 ];
 
 export const LanguagePicker = () => {
-  const userLangs: string[] = useSelector(
+const userLangs: string[] = useSelector(
     (state: RootState) => state.authenticatedUser.user.languages
   );
 

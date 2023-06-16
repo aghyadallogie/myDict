@@ -9,24 +9,28 @@ styles.StyledForm = styled.form`
 `;
 
 styles.Input = styled.input`
-  /* width: 100%;
-  height: 2.2rem;
-  padding: 0.6rem;
-  border: 0;
-  color: blue;
-  outline: 1px solid green;
-  margin-bottom: 1.6rem; */
-
   width: 100%;
   padding: 15px 20px;
   padding-left: 40px;
   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
-
   border: none;
   outline: none;
   background: transparent;
   border-radius: 10px;
   font-size: 1em;
+
+  ::placeholder {
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: #ccc;
+  }
+
+  :active {
+    ::placeholder {
+      visibility: hidden;
+    }
+  }
 `;
 
 styles.Button = styled.button`

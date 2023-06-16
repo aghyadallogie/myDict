@@ -9,6 +9,7 @@
 :root {
   --primary: #12bca2;
   --secondary: #6d15df;
+  --main-bg: #edf1f4;
 }
 
 h1,
@@ -18,7 +19,7 @@ h3 {
 }
 
 span {
-  display: inline
+  display: inline;
 }
 
 body {
@@ -39,20 +40,21 @@ body {
   max-height: 90dvh;
   overflow-y: scroll;
   padding: 20px 50px 50px;
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, .1), -15px -15px 20px #fffb;
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 20px #fffb;
   border-radius: 20px;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  /* justify-content: space-around; */
+  /* align-items: center; */
   flex-direction: column;
   gap: 20px;
 }
 
 @media only screen and (max-width: 414px) {
- .page {
-  margin: 0 auto;
-  min-height: 100dvh;
- }
+  .page {
+    margin: 0 auto;
+    width: 100dvw;
+    min-height: 100dvh;
+  }
 }
 
 /* Styling the track */

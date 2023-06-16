@@ -16,8 +16,6 @@ export type Styles = {
   ErrorMessage: StyledComponent<"h3", any>; // Replace 'any' with specific props if needed
 };
 
-// prevent empty translation
-
 export const TranslateBox: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();

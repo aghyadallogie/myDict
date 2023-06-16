@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../../store/actions/types";
 import { styles } from "./Navbar.styles";
@@ -9,6 +8,7 @@ import {
   RiQuestionnaireFill,
   RiLogoutBoxRFill,
 } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
 
 export type Styles = {
   Nav: any;
@@ -20,30 +20,35 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <styles.Nav>
-      <Link to="/home">
-        <styles.NavItem>
-          <RiHome4Fill size={"2rem"} />
-        </styles.NavItem>
-      </Link>
-      <Link to="/history">
-        <styles.NavItem>
-          <RiFolderHistoryFill size={"2rem"} />
-        </styles.NavItem>
-      </Link>
-      <Link to="/quiz">
-        <styles.NavItem>
-          <RiQuestionnaireFill size={"2rem"} />
-        </styles.NavItem>
-      </Link>
-      <Link to="/settings">
-        <styles.NavItem>
-          <RiSettings2Fill size={"2rem"} />
-        </styles.NavItem>
-      </Link>
-      <span onClick={() => dispatch({ type: ActionTypes.LOGOUT_USER })}>
-        <styles.NavItem>
-          <RiLogoutBoxRFill size={"2rem"} />
-        </styles.NavItem>
+      <NavLink
+        to="/home"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <RiHome4Fill />
+      </NavLink>
+      <NavLink
+        to="/history"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <RiFolderHistoryFill />
+      </NavLink>
+      <NavLink
+        to="/quiz"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <RiQuestionnaireFill />
+      </NavLink>
+      <NavLink
+        to="/settings"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <RiSettings2Fill />
+      </NavLink>
+      <span
+        style={{ cursor: "pointer" }}
+        onClick={() => dispatch({ type: ActionTypes.LOGOUT_USER })}
+      >
+        <RiLogoutBoxRFill />
       </span>
     </styles.Nav>
   );

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { Translation } from "../../components/TargetWord/TargetWord";
 import { Navigate } from "react-router-dom";
 import { Word } from "../../types";
+import { renderCorrectFlag } from "../../helpers";
 
 export const History: FC = () => {
   const dispatch = useDispatch();
@@ -31,16 +32,14 @@ export const History: FC = () => {
         <styles.Table key={word.id} onClick={() => alert(word.id)}>
           {word.translations.map((trans: Translation) => (
             <styles.Row key={trans.lang}>
-              <span
-                className={`fi fi-${trans.lang === "en" ? "gb" : trans.lang}`}
-              ></span>
+              <span className={`fi fi-${renderCorrectFlag(trans.lang)}`}></span>
               <span>{trans.lingo}</span>
             </styles.Row>
           ))}
         </styles.Table>
       ));
     } else {
-      return <h1 style={{ textAlign: "center" }}>L o a d i n g . . .</h1>;
+      return <h2 style={{ textAlign: "center" }}>L o a d i n g . . .</h2>;
     }
   };
 

@@ -8,6 +8,7 @@ import { styles } from "../TargetWord/TargetWord.styles";
 import { Navigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { userActions } from "../../store/actions";
+import { renderCorrectFlag } from "../../helpers";
 
 export const Quiz = () => {
   const dispatch = useDispatch();
@@ -90,7 +91,6 @@ export const Quiz = () => {
             key={opt[0].lingo}
             onClick={() => {
               handleAnswer(opt[0].lingo);
-              console.log(opt[0].lingo);
             }}
           >
             {opt[0].lingo}
@@ -102,22 +102,19 @@ export const Quiz = () => {
   const renderQuiz = () => {
     if (allWords?.length > 10) {
       return (
-        <>
-          <h3>
-            Which of the following is{" "}
+        <div style={{ marginTop: "40px" }}>
+          <h4 style={{ fontWeight: "400", textAlign: "center" }}>
+            What is{" "}
             <span style={{ color: "orange" }}>{randomEnWord[0]?.lingo}</span> in{" "}
-            <span
-              className={`fi fi-${randomLang === "en" ? "gb" : randomLang}`}
-            />{" "}
-            ?
-          </h3>
+            <span className={`fi fi-${renderCorrectFlag(randomLang)}`} /> ?
+          </h4>
           <br />
           <styles.Table>{renderOptions()}</styles.Table>
-          <h3 style={{ textAlign: "center" }}>
+          <h3 style={{ textAlign: "center", fontWeight: "400" }}>
             You are on a streak of{" "}
             <span style={{ color: "orange" }}>{streak}</span> correct answers!
           </h3>
-        </>
+        </div>
       );
     } else {
       return (

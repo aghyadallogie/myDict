@@ -6,13 +6,11 @@ import { History } from "./pages/History/History";
 import { theme } from "./styles";
 import { Quiz } from "./components/Quiz/Quiz";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/reducers";
 import { Navbar } from "./components/Navbar/Navbar";
 
 function App() {
-
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   return (

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { styles } from "./TargetWord.styles";
+import { renderCorrectFlag } from "../../helpers";
 
 export type Styles = {
   Wrapper: any;
@@ -32,9 +33,7 @@ export const TargetWord: FC = () => {
           {targetWord.translations.map((translation: Translation) => (
             <styles.Row key={translation.lang}>
               <span
-                className={`fi fi-${
-                  translation.lang === "en" ? "gb" : translation.lang
-                }`}
+                className={`fi fi-${renderCorrectFlag(translation.lang)}`}
               />
               <span>{translation.lingo}</span>
             </styles.Row>

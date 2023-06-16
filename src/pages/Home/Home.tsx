@@ -6,16 +6,16 @@ import { TargetWord } from "../../components/TargetWord/TargetWord";
 import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
-import { Navbar } from "../../components/Navbar/Navbar";
 
-// &source_lang=${srcLang}
-// todo / notes
+// unionize theme
+// fix reverse history flickering
 // active tab
-// fetch and load user settings
 // history based on user ?
 // settings coming from supabase ?
 // isolate translate logic
-// use valid langs
+// dbl click for delete
+// &source_lang=${srcLang}
+// todo / notes
 
 export const Home: FC = () => {
   const dispatch = useDispatch();

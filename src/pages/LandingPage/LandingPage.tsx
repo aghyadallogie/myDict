@@ -37,14 +37,25 @@ export const LandingPage = () => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center", height: '100%', marginTop: '40px' }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        minHeight: "80dvh",
+        marginTop: "40px",
+        textAlign: 'center'
+      }}
     >
       <h3>Personalized Dictionary</h3>
       <div style={{ width: "80%", height: "100%", margin: "0 auto 6rem" }}>
         <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
         <styles.ErrorMessage>{passwordError}</styles.ErrorMessage>
         <styles.StyledForm
-          style={{ flexDirection: "column", gap: "2rem", paddingBottom: '5rem' }}
+          style={{
+            flexDirection: "column",
+            gap: "2rem",
+            paddingBottom: "5rem",
+          }}
           onSubmit={handleLogin}
         >
           <styles.Input
@@ -74,12 +85,16 @@ export const LandingPage = () => {
           )}
 
           {slide === "login" && (
-            <styles.Button style={{ margin: "0", alignSelf: "center", width: 'auto' }}>
+            <styles.Button
+              style={{ margin: "0", alignSelf: "center", width: "auto" }}
+            >
               Login
             </styles.Button>
           )}
           {slide === "register" && (
-            <styles.Button style={{ margin: "0", alignSelf: "center", width: 'auto' }}>
+            <styles.Button
+              style={{ margin: "0", alignSelf: "center", width: "auto" }}
+            >
               Register
             </styles.Button>
           )}
@@ -87,10 +102,10 @@ export const LandingPage = () => {
       </div>
       <div>
         {slide === "login" && (
-          <span style={{fontSize: '.8rem'}}>
+          <span style={{ fontSize: ".8rem" }}>
             If you do not have an account already ?{" "}
             <span
-              style={{ cursor: "pointer", borderBottom: '1px solid gray' }}
+              style={{ cursor: "pointer", borderBottom: "1px solid gray" }}
               onClick={() => setSlide("register")}
             >
               Register
@@ -98,10 +113,10 @@ export const LandingPage = () => {
           </span>
         )}
         {slide === "register" && (
-          <span style={{fontSize: '.8rem'}}>
+          <span style={{ fontSize: ".8rem" }}>
             Do you have an account already ?{" "}
             <span
-              style={{ cursor: "pointer", borderBottom: '1px solid gray' }}
+              style={{ cursor: "pointer", borderBottom: "1px solid gray" }}
               onClick={() => setSlide("login")}
             >
               Login

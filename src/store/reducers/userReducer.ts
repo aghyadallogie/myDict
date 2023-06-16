@@ -1,5 +1,8 @@
 import { Action, ActionTypes } from "../actions/types";
 
+const storedUser = localStorage.getItem("user");
+// const storedLangs = storedUser ? JSON.parse(storedUser).user.languages : ["de"];
+
 const initialState = {
   isAuthenticated: false,
   isLoading: false,
@@ -49,7 +52,7 @@ export default function (state = initialState, action: Action) {
         return updatedState;
       } else {
         const filtered = state.user.languages.filter(
-          (lang) => lang !== action.payload
+          (lang: string) => lang !== action.payload
         );
         const updatedState = {
           ...state,
