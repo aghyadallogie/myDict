@@ -36,15 +36,13 @@ body {
 .page {
   position: relative;
   width: 480px;
-  min-height: 90dvh;
+  min-height: 70dvh;
   max-height: 90dvh;
   overflow-y: scroll;
-  padding: 20px 50px 50px;
+  padding: 30px 50px 50px;
   box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 20px #fffb;
   border-radius: 20px;
   display: flex;
-  /* justify-content: space-around; */
-  /* align-items: center; */
   flex-direction: column;
   gap: 20px;
 }

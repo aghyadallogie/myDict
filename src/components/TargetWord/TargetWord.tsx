@@ -8,6 +8,7 @@ export type Styles = {
   Wrapper: any;
   Table: any;
   Row: any;
+  DeleteTranslation: any;
 };
 
 export type Translation = {

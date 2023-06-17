@@ -3,7 +3,7 @@ import supabase from "../config/supabaseClient";
 
 const translateWordToLang = async (word: string, lang: string) => {
   const response = await axios.get(
-    `https://api-free.deepl.com/v2/translate?auth_key=856472cb-2963-6442-c723-ed1f6a07c779:fx&text=${word}&target_lang=${lang}`
+    `https://api-free.deepl.com/v2/translate?auth_key=${process.env.REACT_APP_DEEPL_AUTH_KEY}&text=${word}&target_lang=${lang}`
   );
 
   const translation = {

@@ -89,6 +89,7 @@ export const Quiz = () => {
         return (
           <styles.Row
             key={opt[0].lingo}
+            style={{ cursor: "pointer" }}
             onClick={() => {
               handleAnswer(opt[0].lingo);
             }}

@@ -9,7 +9,8 @@ export enum ActionTypes {
   LOGOUT_USER = "LOGOUT_USER",
   AUTH_ERROR = "AUTH_ERROR",
   UP_STREAK = "UP_STREAK",
-  RESET_STREAK = "RESET_STREAK"
+  RESET_STREAK = "RESET_STREAK",
+  DELETE_WORD_SUCCESS = "DELETE_WORD_SUCCESS",
 }
 
 export interface UpdatingTargetWord extends AnyAction {

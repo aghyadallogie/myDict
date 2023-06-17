@@ -28,6 +28,10 @@ styles.Table = styled.div`
 
   &:hover {
     outline: 1px solid #fff;
+
+    div {
+      visibility: visible;
+    }
   }
 `;
 
@@ -36,5 +40,14 @@ styles.Row = styled.div`
   margin: 1rem;
   display: flex;
   justify-content: space-between;
+  /* cursor: pointer; */
+`;
+
+styles.DeleteTranslation = styled.div`
+  position: absolute;
+  right: 0;
+  top: 8px;
+  margin: 0 10px;
+  visibility: hidden;
   cursor: pointer;
 `;

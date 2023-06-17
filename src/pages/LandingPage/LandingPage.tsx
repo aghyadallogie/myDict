@@ -41,7 +41,7 @@ export const LandingPage = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        minHeight: "80dvh",
+        minHeight: "60dvh",
         marginTop: "40px",
         textAlign: 'center'
       }}

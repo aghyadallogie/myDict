@@ -5,7 +5,7 @@ export const styles = {} as Styles;
 
 styles.StyledForm = styled.form`
   display: flex;
-  margin: 1rem 0;
+  margin: 3rem 0 1rem 0;
 `;
 
 styles.Input = styled.input`
@@ -20,7 +20,7 @@ styles.Input = styled.input`
   font-size: 1em;
 
   ::placeholder {
-    font-size: .8em;
+    font-size: 0.8em;
     letter-spacing: 1px;
     font-weight: 400;
     color: #ccc;

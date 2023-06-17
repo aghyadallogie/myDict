@@ -9,8 +9,6 @@ import { RootState } from "../../store/reducers";
 
 // unionize theme
 // fix reverse history flickering
-// active tab
-// history based on user ?
 // settings coming from supabase ?
 // isolate translate logic
 // dbl click for delete
