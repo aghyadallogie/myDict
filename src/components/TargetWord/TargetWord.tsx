@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { styles } from "./TargetWord.styles";
 import { renderCorrectFlag } from "../../helpers";
+import { MdOutlineTranslate } from "react-icons/md";
 
 export type Styles = {
   Wrapper: any;
@@ -23,11 +24,18 @@ export const TargetWord: FC = () => {
 
   return (
     <styles.Wrapper>
-      <h4
-        style={{ marginBottom: "2rem", textAlign: "center", fontWeight: 500 }}
-      >
-        The Latest Word You Translated:
-      </h4>
+      {targetWord ? (
+        <h4
+          style={{ marginBottom: "2rem", textAlign: "center", fontWeight: 500 }}
+        >
+          The Latest Word You Translated:
+        </h4>
+      ) : (
+        <MdOutlineTranslate
+          style={{ color: "#aaa3", width: "100%", margin: "40px 0" }}
+          size={"20rem"}
+        />
+      )}
 
       {targetWord?.created_at && (
         <styles.Table>

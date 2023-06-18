@@ -9,6 +9,7 @@ import { Translation } from "../../components/TargetWord/TargetWord";
 import { Navigate } from "react-router-dom";
 import { Word } from "../../types";
 import { renderCorrectFlag } from "../../helpers";
+import { MdOutlineTranslate } from "react-icons/md";
 
 export const History: FC = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,12 @@ export const History: FC = () => {
         </styles.Table>
       ));
     } else {
-      return <h2 style={{ textAlign: "center" }}>L o a d i n g . . .</h2>;
+      return (
+        <MdOutlineTranslate
+          style={{ color: "#aaa3", width: "100%", margin: "40px 0" }}
+          size={"20rem"}
+        />
+      );
     }
   };
 
