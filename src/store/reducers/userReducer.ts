@@ -41,26 +41,23 @@ export default function (state = initialState, action: Action) {
       return loadedState;
 
     case ActionTypes.UPDATE_USER_LANGUAGES:
-      if (!state.user.languages.includes(action.payload)) {
+      if (!state.user.languages.includes(action.payload.userSettings.at(-1))) {
         const updatedState = {
           ...state,
           user: {
             ...state.user,
             languages: [
               ...state.user.languages,
-              action.payload[0].userSettings.at(-1),
+              action.payload.userSettings.at(-1),
             ],
           },
         };
-        localStorage.setItem("user", JSON.stringify(updatedState.user));
+        localStorage.setItem("user", JSON.stringify({ ...updatedState.user }));
         return updatedState;
       } else {
-        const filtered = state.user.languages.filter(
-          (lang: string) => lang !== action.payload
-        );
         const updatedState = {
           ...state,
-          user: { ...state.user, languages: filtered },
+          user: { ...state.user, languages: action.payload.userSettings },
         };
         localStorage.setItem("user", JSON.stringify(updatedState.user));
         return updatedState;

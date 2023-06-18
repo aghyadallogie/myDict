@@ -38,10 +38,20 @@ export const LanguagePicker = () => {
   const { updateSettingsAction } = bindActionCreators(userActions, dispatch);
 
   const toggleLanguage = (code: string) => {
-    updateSettingsAction({
-      userId: user.id,
-      userLanguages: [...userLangs, code],
-    });
+    const langExists = userLangs.indexOf(code);
+
+    if (langExists > -1) {
+      const filtered = userLangs.filter((lang: string) => lang !== code);
+      updateSettingsAction({
+        userId: user.id,
+        userLanguages: filtered,
+      });
+    } else {
+      updateSettingsAction({
+        userId: user.id,
+        userLanguages: [...userLangs, code],
+      });
+    }
   };
 
   return (

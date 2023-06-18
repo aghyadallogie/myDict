@@ -106,7 +106,7 @@ export const updateSettingsAction =
     if (data) {
       return dispatch({
         type: ActionTypes.UPDATE_USER_LANGUAGES,
-        payload: data,
+        payload: data[0],
       });
     }
   };
@@ -124,7 +124,7 @@ export const addSettingsAction = async (
     console.log(error);
   }
 
-  console.log("new settings added: ", data);
+  console.log("new settings created: ", data);
 };
 
 export const updateTargetWordAction =
