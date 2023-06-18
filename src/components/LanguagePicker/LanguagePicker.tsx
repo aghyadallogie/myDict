@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { ActionTypes } from "../../store/actions/types";
 import { RootState } from "../../store/reducers";
 import { styles } from "./LanguagePicker.styles";
+import { bindActionCreators } from "redux";
+import { userActions } from "../../store/actions";
 
 export type Styles = {
   LanguagePicker: any;
@@ -28,16 +29,18 @@ const langs = [
 ];
 
 export const LanguagePicker = () => {
-const userLangs: string[] = useSelector(
+  const userLangs: string[] = useSelector(
     (state: RootState) => state.authenticatedUser.user.languages
   );
+  const user = useSelector((state: RootState) => state.authenticatedUser.user);
 
   const dispatch = useDispatch();
+  const { updateSettingsAction } = bindActionCreators(userActions, dispatch);
 
   const toggleLanguage = (code: string) => {
-    dispatch({
-      type: ActionTypes.UPDATE_USER_LANGUAGES,
-      payload: code,
+    updateSettingsAction({
+      userId: user.id,
+      userLanguages: [...userLangs, code],
     });
   };
 

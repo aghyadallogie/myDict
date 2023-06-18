@@ -27,10 +27,13 @@ export const registerUserAction =
     }
 
     if (data) {
-      return dispatch({
+      dispatch({
         type: ActionTypes.SIGN_IN_USER,
         payload: data,
       });
+
+      //@ts-ignore
+      addSettingsAction(data.user?.id, ["de"]);
     }
   };
 
@@ -90,20 +93,15 @@ export const loadUserAction =
 
 export const updateSettingsAction =
   (settings?: Settings) => async (dispatch: Dispatch<Action>) => {
-
-    console.log(settings);
-
     const { data, error } = await supabase
       .from("settings")
-      .update({ userSettings: { languages: settings?.userLanguages } })
-      .eq("userId", settings?.userId);
+      .update({ userSettings: settings?.userLanguages })
+      .eq("userId", settings?.userId)
+      .select();
 
     if (error) {
       console.log(error);
     }
-
-    console.log(data);
-    
 
     if (data) {
       return dispatch({
@@ -113,8 +111,25 @@ export const updateSettingsAction =
     }
   };
 
+export const addSettingsAction = async (
+  userId: string,
+  userLanguages: string[]
+) => {
+  const { data, error } = await supabase
+    .from("settings")
+    .insert([{ userId, userSettings: userLanguages }])
+    .select();
+
+  if (error) {
+    console.log(error);
+  }
+
+  console.log("new settings added: ", data);
+};
+
 export const updateTargetWordAction =
-  (word: Translation[], userId: string) => async (dispatch: Dispatch<Action>) => {
+  (word: Translation[], userId: string) =>
+  async (dispatch: Dispatch<Action>) => {
     const { data, error } = await supabase
       .from("words")
       .insert([

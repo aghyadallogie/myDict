@@ -119,7 +119,15 @@ export const Quiz = () => {
       );
     } else {
       return (
-        <h5 style={{ marginTop: "5rem", padding: "3rem", textAlign: "center", fontWeight: '400', color: '#aaa',  }}>
+        <h5
+          style={{
+            marginTop: "5rem",
+            padding: "3rem",
+            textAlign: "center",
+            fontWeight: "400",
+            color: "#aaa",
+          }}
+        >
           You do not have enough translations in order to play the quiz!
         </h5>
       );

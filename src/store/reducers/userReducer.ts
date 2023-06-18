@@ -1,13 +1,11 @@
 import { Action, ActionTypes } from "../actions/types";
 
-const storedUser = localStorage.getItem("user");
-// const storedLangs = storedUser ? JSON.parse(storedUser).user.languages : ["de"];
-
 const initialState = {
   isAuthenticated: false,
   isLoading: false,
   errorMessage: "",
   targetWord: {},
+  languages: ["de"],
   words: [],
   user: { username: "", languages: ["de"], streak: 0 },
 };
@@ -36,7 +34,10 @@ export default function (state = initialState, action: Action) {
         isLoading: false,
         targetWord: action.payload.words[action.payload.words.length - 1],
         words: action.payload,
+        languages: action.payload.settings,
+        user: { ...state.user, languages: action.payload.settings },
       };
+      localStorage.setItem("user", JSON.stringify(loadedState.user));
       return loadedState;
 
     case ActionTypes.UPDATE_USER_LANGUAGES:
@@ -45,7 +46,10 @@ export default function (state = initialState, action: Action) {
           ...state,
           user: {
             ...state.user,
-            languages: [...state.user.languages, action.payload],
+            languages: [
+              ...state.user.languages,
+              action.payload[0].userSettings.at(-1),
+            ],
           },
         };
         localStorage.setItem("user", JSON.stringify(updatedState.user));
@@ -84,7 +88,6 @@ export default function (state = initialState, action: Action) {
       return initialState;
 
     case ActionTypes.AUTH_ERROR:
-      console.log("ppp", action.payload);
       return { ...state, errorMessage: action.payload.message };
 
     default:
