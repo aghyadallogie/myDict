@@ -40,7 +40,6 @@ styles.Row = styled.div`
   margin: 1rem;
   display: flex;
   justify-content: space-between;
-  /* cursor: pointer; */
 `;
 
 styles.DeleteTranslation = styled.div`

@@ -1,3 +1,4 @@
+import { Word } from "../../types";
 import { Action, ActionTypes } from "../actions/types";
 
 const initialState = {
@@ -66,6 +67,14 @@ export default function (state = initialState, action: Action) {
     case ActionTypes.UPDATE_TARGET_WORD:
       const updatedState = { ...state, targetWord: action.payload };
       return updatedState;
+
+    case ActionTypes.DELETE_WORD_SUCCESS:
+      // @ts-ignore
+      const filteredWords = state.words.words.filter(
+        (word: Word) => word.id !== action.payload
+      );
+
+      return { ...state, words: { words: filteredWords } };
 
     case ActionTypes.UP_STREAK:
       return {

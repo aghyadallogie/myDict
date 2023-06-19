@@ -151,3 +151,17 @@ export const updateTargetWordAction =
       });
     }
   };
+
+export const deleteTranslationAction =
+  (id: string) => async (dispatch: Dispatch<Action>) => {
+    const { data, error } = await supabase.from("words").delete().eq("id", id);
+
+    if (error) {
+      console.log(error);
+    }
+
+    dispatch({
+      type: ActionTypes.DELETE_WORD_SUCCESS,
+      payload: id,
+    });
+  };

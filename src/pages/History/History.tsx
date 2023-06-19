@@ -13,7 +13,10 @@ import { MdOutlineTranslate, MdDelete } from "react-icons/md";
 
 export const History: FC = () => {
   const dispatch = useDispatch();
-  const { loadUserAction } = bindActionCreators(userActions, dispatch);
+  const { loadUserAction, deleteTranslationAction } = bindActionCreators(
+    userActions,
+    dispatch
+  );
 
   const allWords = useSelector(
     (state: RootState) => state.authenticatedUser.words.words
@@ -31,7 +34,9 @@ export const History: FC = () => {
     if (allWords?.length > 0) {
       return allWords.reverse().map((word: Word) => (
         <styles.Table key={word.id}>
-          <styles.DeleteTranslation onClick={() => alert(word.id)}>
+          <styles.DeleteTranslation
+            onClick={() => deleteTranslationAction(word.id)}
+          >
             <MdDelete />
           </styles.DeleteTranslation>
           {word.translations.map((trans: Translation) => (
