@@ -9,7 +9,7 @@ import { Translation } from "../../components/TargetWord/TargetWord";
 import { Navigate } from "react-router-dom";
 import { Word } from "../../types";
 import { renderCorrectFlag } from "../../helpers";
-import { MdOutlineTranslate } from "react-icons/md";
+import { MdOutlineTranslate, MdDelete } from "react-icons/md";
 
 export const History: FC = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,10 @@ export const History: FC = () => {
   const renderWords = () => {
     if (allWords?.length > 0) {
       return allWords.reverse().map((word: Word) => (
-        <styles.Table key={word.id} onClick={() => alert(word.id)}>
+        <styles.Table key={word.id}>
+          <styles.DeleteTranslation onClick={() => alert(word.id)}>
+            <MdDelete />
+          </styles.DeleteTranslation>
           {word.translations.map((trans: Translation) => (
             <styles.Row key={trans.lang}>
               <span className={`fi fi-${renderCorrectFlag(trans.lang)}`}></span>

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { styles } from "./TargetWord.styles";
 import { renderCorrectFlag } from "../../helpers";
-import { MdOutlineTranslate } from "react-icons/md";
+import { MdOutlineTranslate, MdDelete } from "react-icons/md";
 
 export type Styles = {
   Wrapper: any;

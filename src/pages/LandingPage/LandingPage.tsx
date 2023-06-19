@@ -43,7 +43,7 @@ export const LandingPage = () => {
         justifyContent: "space-around",
         minHeight: "60dvh",
         marginTop: "40px",
-        textAlign: 'center'
+        textAlign: "center",
       }}
     >
       <h3>Personalized Dictionary</h3>

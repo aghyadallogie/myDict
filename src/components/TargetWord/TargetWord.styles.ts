@@ -45,9 +45,13 @@ styles.Row = styled.div`
 
 styles.DeleteTranslation = styled.div`
   position: absolute;
-  right: 0;
-  top: 8px;
+  right: -10px;
+  top: 0px;
   margin: 0 10px;
   visibility: hidden;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-top: 3px;
   cursor: pointer;
+  background-color: white;
 `;
