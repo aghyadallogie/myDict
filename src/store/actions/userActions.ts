@@ -154,7 +154,7 @@ export const updateTargetWordAction =
 
 export const deleteTranslationAction =
   (id: string) => async (dispatch: Dispatch<Action>) => {
-    const { data, error } = await supabase.from("words").delete().eq("id", id);
+    const { error } = await supabase.from("words").delete().eq("id", id);
 
     if (error) {
       console.log(error);

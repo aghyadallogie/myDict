@@ -23,7 +23,7 @@ const langs = [
   { code: "hu", flag: "fi fi-hu" },
   { code: "el", flag: "fi fi-gr" },
   { code: "pl", flag: "fi fi-pl" },
-  { code: "ro", flag: "fi fi-ro" },
+  { code: "nl", flag: "fi fi-nl" },
   { code: "uk", flag: "fi fi-ua" },
   { code: "ja", flag: "fi fi-jp" },
 ];
