@@ -22,7 +22,8 @@ export const Quiz = () => {
   }, []);
 
   const userLangs = useSelector(
-    (state: RootState) => state.authenticatedUser.user.languages
+    // @ts-ignore
+    (state: RootState) => state.authenticatedUser.languages
   );
 
   const streak = useSelector(

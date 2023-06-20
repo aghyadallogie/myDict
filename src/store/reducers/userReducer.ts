@@ -19,12 +19,11 @@ export default function (state = initialState, action: Action) {
         isAuthenticated: true,
         user: { ...action.payload?.user, ...state.user },
       };
-      localStorage.setItem("user", JSON.stringify(newState.user));
       return newState;
     case ActionTypes.USER_LOADING:
       return {
         ...state,
-        user: JSON.parse(localStorage.getItem("user") || ""),
+        user: {...JSON.parse(localStorage.getItem("sb-wvufixxdkupgxyhglugo-auth-token") || "")?.user, ...state.user},
         isLoading: true,
       };
 
@@ -38,13 +37,13 @@ export default function (state = initialState, action: Action) {
         languages: action.payload.settings,
         user: { ...state.user, languages: action.payload.settings },
       };
-      localStorage.setItem("user", JSON.stringify(loadedState.user));
       return loadedState;
 
     case ActionTypes.UPDATE_USER_LANGUAGES:
       if (!state.user.languages.includes(action.payload.userSettings.at(-1))) {
         const updatedState = {
           ...state,
+          languages: [...state.languages, action.payload.userSettings.at(-1)],
           user: {
             ...state.user,
             languages: [
@@ -53,14 +52,13 @@ export default function (state = initialState, action: Action) {
             ],
           },
         };
-        localStorage.setItem("user", JSON.stringify({ ...updatedState.user }));
         return updatedState;
       } else {
         const updatedState = {
           ...state,
+          languages: action.payload.userSettings,
           user: { ...state.user, languages: action.payload.userSettings },
         };
-        localStorage.setItem("user", JSON.stringify(updatedState.user));
         return updatedState;
       }
 
@@ -90,7 +88,7 @@ export default function (state = initialState, action: Action) {
 
     case ActionTypes.LOGOUT_USER:
       // should not be removed but updated to nullify id
-      localStorage.removeItem("user");
+      localStorage.removeItem("sb-wvufixxdkupgxyhglugo-auth-token");
       return initialState;
 
     case ActionTypes.AUTH_ERROR:

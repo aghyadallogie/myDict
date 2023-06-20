@@ -30,7 +30,8 @@ const langs = [
 
 export const LanguagePicker = () => {
   const userLangs: string[] = useSelector(
-    (state: RootState) => state.authenticatedUser.user.languages
+    // @ts-ignore
+    (state: RootState) => state.authenticatedUser.languages
   );
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
 

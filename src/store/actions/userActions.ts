@@ -62,7 +62,7 @@ export const loginUserAction =
 
 export const loadUserAction =
   (userId?: string) => async (dispatch: Dispatch<Action>) => {
-    dispatch({ type: ActionTypes.USER_LOADING, payload: "" });
+    dispatch({ type: ActionTypes.USER_LOADING, payload: userId });
 
     const { data: words, error: wordsError } = await supabase
       .from("words")
