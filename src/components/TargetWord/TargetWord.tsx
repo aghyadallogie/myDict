@@ -31,10 +31,24 @@ export const TargetWord: FC = () => {
           The Latest Word You Translated:
         </h4>
       ) : (
-        <MdOutlineTranslate
-          style={{ color: "#aaa3", width: "100%", margin: "40px 0" }}
-          size={"20rem"}
-        />
+        <>
+              <MdOutlineTranslate
+                style={{ color: "#aaa3", width: "100%", margin: "40px 0" }}
+                size={"20rem"}
+              />
+          <h5
+            style={{
+              marginBottom: "2rem",
+              textAlign: "center",
+              fontWeight: 500,
+              padding: '0 20px',
+              color: "#aaa8"
+            }}
+          >
+            You can pick the languages you want to translate your words to in
+            the settings tab!
+          </h5>
+        </>
       )}
 
       {targetWord?.created_at && (

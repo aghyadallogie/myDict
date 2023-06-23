@@ -7,6 +7,8 @@ import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 
+// sticky navbar
+// more messages 'tooltip'
 // unionize theme
 // fix reverse history flickering
 // settings coming from supabase ?
