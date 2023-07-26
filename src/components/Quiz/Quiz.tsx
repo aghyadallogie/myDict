@@ -127,9 +127,11 @@ export const Quiz = () => {
             textAlign: "center",
             fontWeight: "400",
             color: "#aaa",
+            lineHeight: '2rem',
           }}
         >
-          You do not have enough translations in order to play the quiz!
+          You need at least 10 translations in order to play the quiz!
+          and it's still in Beta &#10084;
         </h5>
       );
     }

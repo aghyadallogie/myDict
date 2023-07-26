@@ -7,15 +7,16 @@ import { TranslateBox } from "../../components/TranslateBox/TranslateBox";
 import { userActions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 
-// sticky navbar
-// more messages 'tooltip'
+// on refresh user should be revalidated from localStorage
+// spruche
+// spinner when isLoading
+// tool
 // unionize theme
 // fix reverse history flickering
-// settings coming from supabase ?
 // isolate translate logic
-// dbl click for delete
 // &source_lang=${srcLang}
 // todo / notes
+// purge store
 
 export const Home: FC = () => {
   const dispatch = useDispatch();

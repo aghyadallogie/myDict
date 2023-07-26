@@ -7,6 +7,7 @@ import {
   RiFolderHistoryFill,
   RiQuestionnaireFill,
   RiLogoutBoxRFill,
+  RiDoubleQuotesR
 } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 
@@ -37,6 +38,12 @@ export const Navbar = () => {
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         <RiQuestionnaireFill />
+      </NavLink>
+      <NavLink
+        to="/quotes"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <RiDoubleQuotesR />
       </NavLink>
       <NavLink
         to="/settings"

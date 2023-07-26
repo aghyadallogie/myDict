@@ -9,6 +9,7 @@ import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/reducers";
 import { Navbar } from "./components/Navbar/Navbar";
+import { Quotes } from "./components/Quotes/Quotes";
 
 function App() {
   const user = useSelector((state: RootState) => state.authenticatedUser.user);
@@ -23,6 +24,7 @@ function App() {
             <Route path="/history" element={<History />} />
             <Route path="/home" element={<Home />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/quotes" element={<Quotes />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>

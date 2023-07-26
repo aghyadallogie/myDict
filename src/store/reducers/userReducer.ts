@@ -8,7 +8,9 @@ const initialState = {
   targetWord: {},
   languages: ["de"],
   words: [],
-  user: { username: "", languages: ["de"], streak: 0 },
+  // @ts-ignore
+  // user: JSON.parse(localStorage.getItem("sb-wvufixxdkupgxyhglugo-auth-token")).user || { username: "", languages: ["de"], streak: 0 },
+  user: {...JSON.parse(localStorage.getItem("sb-wvufixxdkupgxyhglugo-auth-token") || "")?.user, ...state.user},
 };
 
 export default function (state = initialState, action: Action) {

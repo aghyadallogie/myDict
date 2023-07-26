@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import userReducer from "./userReducer";
 import { Word } from "../../types";
+import quoteReducer from "./quoteReducer";
 
 export interface RootState {
   authenticatedUser: {
@@ -17,11 +18,14 @@ export interface RootState {
     words: any;
     targetWord: Word;
   };
-  // Define other slices of state here
+  quote: {
+    saying: string
+  }
 }
 
 const reducers = combineReducers({
   authenticatedUser: userReducer,
+  quote: quoteReducer
 });
 
 export default reducers;

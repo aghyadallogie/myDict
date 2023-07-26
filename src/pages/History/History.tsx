@@ -32,7 +32,7 @@ export const History: FC = () => {
 
   const renderWords = () => {
     if (allWords?.length > 0) {
-      return allWords.reverse().map((word: Word) => (
+      return allWords.map((word: Word) => (
         <styles.Table key={word.id}>
           <styles.DeleteTranslation
             onClick={() => deleteTranslationAction(word.id)}

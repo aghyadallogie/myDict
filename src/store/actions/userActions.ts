@@ -3,6 +3,7 @@ import { Translation } from "../../components/TargetWord/TargetWord";
 import supabase from "../../config/supabaseClient";
 import { ActionTypes } from "./types";
 import { Action } from "./types";
+import axios from 'axios';
 
 export type Settings = {
   userId: string;
@@ -16,49 +17,49 @@ export type AuthData = {
 
 export const registerUserAction =
   ({ email, password }: AuthData) =>
-  async (dispatch: Dispatch<Action>) => {
-    const { error, data } = await supabase.auth.signUp({ email, password });
+    async (dispatch: Dispatch<Action>) => {
+      const { error, data } = await supabase.auth.signUp({ email, password });
 
-    if (error) {
-      return dispatch({
-        type: ActionTypes.AUTH_ERROR,
-        payload: error,
-      });
-    }
+      if (error) {
+        return dispatch({
+          type: ActionTypes.AUTH_ERROR,
+          payload: error,
+        });
+      }
 
-    if (data) {
-      dispatch({
-        type: ActionTypes.SIGN_IN_USER,
-        payload: data,
-      });
+      if (data) {
+        dispatch({
+          type: ActionTypes.SIGN_IN_USER,
+          payload: data,
+        });
 
-      //@ts-ignore
-      addSettingsAction(data.user?.id, ["de"]);
-    }
-  };
+        //@ts-ignore
+        addSettingsAction(data.user?.id, ["de"]);
+      }
+    };
 
 export const loginUserAction =
   ({ email, password }: AuthData) =>
-  async (dispatch: Dispatch<Action>) => {
-    const { error, data } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return dispatch({
-        type: ActionTypes.AUTH_ERROR,
-        payload: error,
+    async (dispatch: Dispatch<Action>) => {
+      const { error, data } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-    }
 
-    if (data) {
-      return dispatch({
-        type: ActionTypes.SIGN_IN_USER,
-        payload: data,
-      });
-    }
-  };
+      if (error) {
+        return dispatch({
+          type: ActionTypes.AUTH_ERROR,
+          payload: error,
+        });
+      }
+
+      if (data) {
+        return dispatch({
+          type: ActionTypes.SIGN_IN_USER,
+          payload: data,
+        });
+      }
+    };
 
 export const loadUserAction =
   (userId?: string) => async (dispatch: Dispatch<Action>) => {
@@ -129,28 +130,28 @@ export const addSettingsAction = async (
 
 export const updateTargetWordAction =
   (word: Translation[], userId: string) =>
-  async (dispatch: Dispatch<Action>) => {
-    const { data, error } = await supabase
-      .from("words")
-      .insert([
-        {
-          created_by: userId,
-          translations: word,
-        },
-      ])
-      .select();
+    async (dispatch: Dispatch<Action>) => {
+      const { data, error } = await supabase
+        .from("words")
+        .insert([
+          {
+            created_by: userId,
+            translations: word,
+          },
+        ])
+        .select();
 
-    if (error) {
-      console.log(error);
-    }
+      if (error) {
+        console.log(error);
+      }
 
-    if (data) {
-      return dispatch({
-        type: ActionTypes.UPDATE_TARGET_WORD,
-        payload: data[0],
-      });
-    }
-  };
+      if (data) {
+        return dispatch({
+          type: ActionTypes.UPDATE_TARGET_WORD,
+          payload: data[0],
+        });
+      }
+    };
 
 export const deleteTranslationAction =
   (id: string) => async (dispatch: Dispatch<Action>) => {
@@ -165,3 +166,31 @@ export const deleteTranslationAction =
       payload: id,
     });
   };
+
+export const loadQuoteAction = () => async (dispatch: Dispatch<Action>) => {
+  const options = {
+    method: 'GET',
+    url: 'https://quotes15.p.rapidapi.com/quotes/random/',
+    params: {
+      language_code: 'de'
+    },
+    headers: {
+      'X-RapidAPI-Key': '1f8fdb9d10msha6bc6fd153420c8p19461ajsnc3abd1263fc2',
+      'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await axios.request(options);
+    // const response = { data: { content: 'Bildung ist das, was übrig bleibt, wenn man alles, was man in der Schule gelernt hat, vergisst' } }
+    console.log(response.data.content);
+
+    dispatch({
+      type: ActionTypes.GET_QUOTE,
+      payload: response.data.content
+    })
+    
+  } catch (error) {
+    console.error(error);
+  }
+}

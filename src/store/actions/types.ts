@@ -11,6 +11,7 @@ export enum ActionTypes {
   UP_STREAK = "UP_STREAK",
   RESET_STREAK = "RESET_STREAK",
   DELETE_WORD_SUCCESS = "DELETE_WORD_SUCCESS",
+  GET_QUOTE = "GET_QUOTE"
 }
 
 export interface UpdatingTargetWord extends AnyAction {
