@@ -17,6 +17,8 @@ import { RootState } from "../../store/reducers";
 // &source_lang=${srcLang}
 // todo / notes
 
+// align towards flags
+
 export const Home: FC = () => {
   const dispatch = useDispatch();
   const { loadUserAction } = bindActionCreators(userActions, dispatch);

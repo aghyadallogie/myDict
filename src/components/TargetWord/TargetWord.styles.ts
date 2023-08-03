@@ -39,7 +39,8 @@ styles.Row = styled.div`
   border-bottom: 1px solid #fffb;
   margin: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 2rem;
 `;
 
 styles.DeleteTranslation = styled.div`
