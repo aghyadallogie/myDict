@@ -75,7 +75,7 @@ export const loadUserAction =
       .eq("userId", userId);
 
     const errors = [wordsError, settingsError];
-
+    
     if (errors[0]) {
       return dispatch({
         type: ActionTypes.AUTH_ERROR,
